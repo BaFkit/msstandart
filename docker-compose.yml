@@ -11,3 +11,10 @@ services:
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: msstandart_db
+    restart: unless-stopped
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
