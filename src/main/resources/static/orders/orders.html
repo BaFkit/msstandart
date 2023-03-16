@@ -1,0 +1,26 @@
+<div>
+    <div class="col-sm-6 col-md-10">
+        <table class="table table-hover">
+            <tr>
+                <td>Номер заказа</td>
+                <td>ФИО на памятнике</td>
+                <td>Телефон</td>
+                <td>Дата заказа</td>
+                <td>Статус</td>
+            </tr>
+            <tbody>
+            <tr ng-repeat="order in Orders">
+                <td>{{order.id}}</td>
+                <td>{{order.nameOnMonument}}</td>
+                <td>{{order.phone}}</td>
+                <td>{{order.createdAt | date: 'dd.MM.yyyy'}}</td>
+                <td>{{order.status}}</td>
+                <td>
+                    <button class="btn btn-primary" ng-click="">Посмотреть</button>
+                </td>
+            </tr>
+            </tbody>
+            <p></p>
+        </table>
+    </div>
+</div>

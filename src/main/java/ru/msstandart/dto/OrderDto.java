@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -31,6 +32,8 @@ public class OrderDto {
 
     private String stoneFigure;
 
+    private String nameOnMonument;
+
     private String workPackage;
 
     private BigDecimal stoneCost;
@@ -40,4 +43,6 @@ public class OrderDto {
     private BigDecimal orderCost;
 
     private String status;
+
+    private LocalDateTime createdAt;
 }
