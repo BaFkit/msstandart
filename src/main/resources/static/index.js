@@ -24,30 +24,31 @@
     }
 
     function run($rootScope, $http, $localStorage) {
-        if ($localStorage.springWebUser) {
-            $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.springWebUser.token;
+        if ($localStorage.webUser) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.webUser.token;
         }
     }
 })();
 
 
-angular.module('msstandart').controller('indexController', function ($scope, $rootScope, $http, $localStorage) {
+angular.module('msstandart').controller('indexController', function ($scope, $rootScope, $http, $location, $localStorage) {
 
 
-    if ($localStorage.springWebUser) {
-        $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.springWebUser.token;
+    if ($localStorage.webUser) {
+        $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.webUser.token;
     }
 
     $scope.tryToAuth = function () {
-        $http.post('http://localhost:5555/auth/auth', $scope.user)
+        $http.post('http://localhost:8080/auth', $scope.user)
             .then(function successCallback(response) {
                 if (response.data.token) {
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
-                    $localStorage.springWebUser = {username: $scope.user.username, token: response.data.token};
-                    $localStorage.cartName = "cart_" + $scope.user.username;
+                    $localStorage.webUser = {username: $scope.user.username, token: response.data.token};
 
                     $scope.user.username = null;
                     $scope.user.password = null;
+
+                    $location.path('/');
                 }
             }, function errorCallback(response) {
 
@@ -62,15 +63,16 @@ angular.module('msstandart').controller('indexController', function ($scope, $ro
         if ($scope.user.password) {
             $scope.user.password = null;
         }
+        $location.path('/');
     };
 
     $scope.clearUser = function () {
-        delete $localStorage.springWebUser;
+        delete $localStorage.webUser;
         $http.defaults.headers.common.Authorization = '';
     };
 
     $rootScope.isUserLoggedIn = function () {
-        if ($localStorage.springWebUser) {
+        if ($localStorage.webUser) {
             return true;
         } else {
             return false;

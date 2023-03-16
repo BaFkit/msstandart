@@ -39,6 +39,8 @@ public class Order {
 
     private String stoneFigure;
 
+    private String nameOnMonument;
+
     private String workPackage;
 
     private BigDecimal stoneCost;

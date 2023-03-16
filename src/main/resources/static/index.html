@@ -24,10 +24,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#!/catalog">Каталог</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#!/orders">Мои заказы</a>
+                <li class="nav-item" ng-show="isUserLoggedIn()">
+                    <a class="nav-link" href="#!/orders">Заказы</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" ng-show="isUserLoggedIn()">
                     <a class="nav-link" href="#!/info">Информация</a>
                 </li>
                 <li class="nav-item" ng-show="!isUserLoggedIn()">
@@ -55,6 +55,8 @@
     <ng-view></ng-view>
 
     <script src="index.js"></script>
+    <script src="orders/orders.js"></script>
+    <script src="info/info.js"></script>
     <script src=""></script>
 
 </div>
