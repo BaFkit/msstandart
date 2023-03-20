@@ -33,7 +33,6 @@
 
 angular.module('msstandart').controller('indexController', function ($scope, $rootScope, $http, $location, $localStorage) {
 
-
     if ($localStorage.webUser) {
         $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.webUser.token;
     }
@@ -44,11 +43,10 @@ angular.module('msstandart').controller('indexController', function ($scope, $ro
                 if (response.data.token) {
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
                     $localStorage.webUser = {username: $scope.user.username, token: response.data.token};
-
                     $scope.user.username = null;
                     $scope.user.password = null;
-
                     $location.path('/');
+                    updateDropDown()
                 }
             }, function errorCallback(response) {
 
@@ -71,6 +69,7 @@ angular.module('msstandart').controller('indexController', function ($scope, $ro
         $http.defaults.headers.common.Authorization = '';
     };
 
+
     $rootScope.isUserLoggedIn = function () {
         if ($localStorage.webUser) {
             return true;
@@ -78,4 +77,12 @@ angular.module('msstandart').controller('indexController', function ($scope, $ro
             return false;
         }
     };
+
+    function updateDropDown() {
+        if ($localStorage.webUser) {
+            $scope.username = $localStorage.webUser.username;
+        }
+    }
+
+    updateDropDown()
 });
