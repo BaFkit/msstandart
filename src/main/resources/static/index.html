@@ -4,12 +4,14 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://kit.fontawesome.com/944a576475.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-route.min.js"></script>
@@ -17,48 +19,104 @@
 
 <body>
 
-<div class="container" ng-controller="indexController">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#!/catalog">Каталог</a>
-                </li>
-                <li class="nav-item" ng-show="isUserLoggedIn()">
-                    <a class="nav-link" href="#!/orders">Заказы</a>
-                </li>
-                <li class="nav-item" ng-show="isUserLoggedIn()">
-                    <a class="nav-link" href="#!/info">Информация</a>
-                </li>
-                <li class="nav-item" ng-show="!isUserLoggedIn()">
-                    <form class="align-middle" ng-submit="tryToAuth()">
-                        <div class="input-group input-group-sm" style="padding: 4px;">
-                            <input id="navLoginField" class="form-control" ng-model="user.username" type="text"
-                                   aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">
-
-                            <input id="navPasswordField" class="form-control" ng-model="user.password" type="password"
-                                   aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">
-
-                            <button id="navLoginSubmit" class="btn btn-outline-warning btn-sm"
-                                    style="margin-left: 10px;" type="submit">Войти
-                            </button>
-                        </div>
-                    </form>
-                </li>
-                <li class="nav-item" ng-show="isUserLoggedIn()" style="padding: 4px;">
-                    <button class="btn btn-outline-secondary btn-sm" ng-click="tryToLogout()">Выйти</button>
-                </li>
-            </ul>
+<div class="container-fluid" ng-controller="indexController">
+    <div class="row flex-nowrap">
+        <div class="bg-dark col-auto col-md-4 col-lg-3 min-vh-100 d-flex flex-column justify-content-between">
+            <div clas="bg-dark p-2">
+                <a class="d-flex text-decoration-none mt-1 align-item-center text-white">
+                    <span class="fs-4 d-none d-sm-inline" id="title">MsStandart</span>
+                </a>
+                <div>
+                    <li class="nav-item" ng-show="!isUserLoggedIn()">
+                        <form class="align-middle" ng-submit="tryToAuth()">
+                            <div class="input-group input-group-sm" id="input-group-sm">
+                                <ul>
+                                    <li>
+                                        <input id="navLoginField" class="form-control" ng-model="user.username" type="text" placeholder="Введите логин"
+                                               aria-describedby="inputGroup-sizing-sm">
+                                    </li>
+                                    <li>
+                                        <input id="navPasswordField" class="form-control" ng-model="user.password" type="password" placeholder="Введите пароль"
+                                               aria-describedby="inputGroup-sizing-sm">
+                                    </li>
+                                    <li>
+                                        <button id="navLoginSubmit" class="btn btn-outline-light btn-sm"
+                                                type="submit">Войти
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </form>
+                    </li>
+                </div>
+                <ul class="nav-pills flex-column mt-4" ng-show="isUserLoggedIn()">
+                    <li class="nav-item py-2 py-sm-0">
+                        <a href="#" class="nav-link text-white">
+                            <i class="fs-5 fa fa-house"></i><span
+                                class="fs-4 ms-3 d-none d-sm-inline">Главная</span>
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0">
+                        <a href="#" class="nav-link text-white">
+                            <i class="fs-5 fa fa-table-list"></i><span
+                                class="fs-4 ms-3 d-none d-sm-inline">Каталог</span>
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0">
+                        <a href="#!/orders" class="nav-link text-white">
+                            <i class="fs-5 fa fa-clipboard"></i><span
+                                class="fs-4 ms-3 d-none d-sm-inline">Заказы</span>
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0">
+                        <a href="#!/info" class="nav-link text-white">
+                            <i class="fs-5 fa fa-circle-info"></i><span
+                                class="fs-4 ms-3 d-none d-sm-inline">Информация</span>
+                        </a>
+                    </li>
+<!--                    <li class="nav-item py-2 py-sm-0">-->
+<!--                        <a href="#" class="nav-link text-white">-->
+<!--                            <i class="fs-5 fa fa-table-list"></i><span-->
+<!--                                class="fs-4 ms-3 d-none d-sm-inline">Products</span>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item py-2 py-sm-0">-->
+<!--                        <a href="#" class="nav-link text-white">-->
+<!--                            <i class="fs-5 fa fa-table-list"></i><span-->
+<!--                                class="fs-4 ms-3 d-none d-sm-inline">Orders</span>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item py-2 py-sm-0">-->
+<!--                        <a href="#" class="nav-link text-white">-->
+<!--                            <i class="fs-5 fa fa-table-list"></i><span-->
+<!--                                class="fs-4 ms-3 d-none d-sm-inline">Customers</span>-->
+<!--                        </a>-->
+<!--                    </li>-->
+                </ul>
+            </div>
+            <div class="dropdown open p-3" ng-show="isUserLoggedIn()">
+                <h4>{{username}}</h4>
+                <button class="btn border-none dropdown-toggle text-white" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-user"></i><span class="ms-2" >{{username}}</span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="triggerId">
+                    <button class="dropdown-item" href="#">Профиль</button>
+                    <button class="dropdown-item" href="#">Настройки</button>
+                    <button class="dropdown-item" href="#" ng-click="tryToLogout()">Выйти</button>
+                </div>
+            </div>
         </div>
-    </nav>
+        <!--Content-->
+        <div>
+            <ng-view></ng-view>
 
-    <ng-view></ng-view>
-
-    <script src="index.js"></script>
-    <script src="orders/orders.js"></script>
-    <script src="info/info.js"></script>
-    <script src=""></script>
-
+            <script src="index.js"></script>
+            <script src="orders/orders.js"></script>
+            <script src="info/info.js"></script>
+            <script src=""></script>
+        </div>
+    </div>
 </div>
 
 </body>

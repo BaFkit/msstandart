@@ -17,7 +17,7 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping
     public List<OrderDto> getAllOrders() {
        return orderService.getAll();
