@@ -1,0 +1,123 @@
+<form>
+
+    <div class="mb-3">
+        <label class="form-label">Заказчик:</label>
+        <input type="text" class="form-control" placeholder="Ф.И.О.">
+        <div id="textHelpName" class="form-text">Нужно указать полное имя заказчика(обязательно)</div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Номер телефона:</label>
+        <input type="number" class="form-control" placeholder="Телефон">
+        <div id="numberHelpPhone" class="form-text">Нужно указать номер телефона заказчика(обязательно)</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Почта:</label>
+        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@mail.ru">
+        <div id="textHelpEmail" class="form-text">Электронная почта(не обязательно)</div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Адрес:</label>
+        <input type="text" class="form-control" placeholder="Адрес">
+        <div id="textHelpAddress" class="form-text">Нужно указать адрес заказчика(обязательно)</div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Артикул памятника:</label>
+        <input type="text" class="form-control" >
+        <div id="textHelpVendorCode" class="form-text">Нужно указать артикул памятника</div>
+    </div>
+
+    <div>
+        <label class="form-label">Материал памятника:</label>
+        <select class="form-select" aria-label="Default select example">
+            <option selected>...</option>
+            <option value="granite">Гранит</option>
+            <option value="marble">Мрамор</option>
+        </select>
+    </div>
+
+    <div>
+        <label class="form-label">Размер памятника:</label>
+        <select class="form-select" aria-label="Default select example">
+            <option selected>...</option>
+            <option value="80x40x6">80x40x6</option>
+            <option value="100x45x7">100x45x6</option>
+            <option value="100x50x7">100x50x7</option>
+            <option value="110x50x7">110x50x7</option>
+            <option value="110x60x7">110x60x7</option>
+            <option value="120x60x7">120x60x7</option>
+        </select>
+    </div>
+
+
+    <div class="mb-3">
+        <label class="form-label">Комплект памятника:</label>
+        <input type="text" class="form-control" placeholder="2шт-100х5х8; 1шт-50х5х8; 1шт-50x12x20">
+        <div id="textHelpStoneKit" class="form-text">Нужно указать комплект</div>
+    </div>
+
+    <div>
+        <label class="form-label">Фигура памятника:</label>
+        <select class="form-select" aria-label="Default select example">
+            <option selected>...</option>
+            <option value="Волна">Волна</option>
+            <option value="Полусфера">Полусфера</option>
+            <option value="Арка">Арка</option>
+            <option value="Тюльпан">Тюльпан</option>
+            <option value="Не стандарт">Не стандарт</option>
+        </select>
+        <fieldset disabled>
+            <div class="mb-3">
+                <label for="disabledTextInput" class="form-label">Указать не стандартную фигуру:</label>
+                <input type="text" id="disabledTextInput" class="form-control">
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">ФИО на памятнике:</label>
+        <input type="text" class="form-control" placeholder="ФИО">
+        <div id="textHelpNameOnMonument" class="form-text">Нужно указать ФИО на памятнике</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Работа на памятнике:</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Стоимость памятника:</label>
+        <input type="number" class="form-control" placeholder="Рублей">
+        <div id="stoneCostHelp" class="form-text">Нужно указать стоимость памятника</div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Стоимость работы:</label>
+        <input type="number" class="form-control" placeholder="Рублей">
+        <div id="workCostHelp" class="form-text">Нужно указать стоимость работы</div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Стоимость установки:</label>
+        <input type="number" class="form-control" placeholder="Рублей">
+        <div id="installationCostHelp" class="form-text">Нужно указать стоимость работы по установке</div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Итоговая стоимость:</label>
+        <input class="form-control" type="text" value="Readonly input here..." aria-label="readonly input example" readonly>
+    </div>
+
+
+    <div class="d-grid gap-2 d-md-block">
+        <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off">
+        <label class="btn btn-outline-warning" for="btn-check-outlined">Проверено</label>
+    </div>
+
+    <div id="button-order-create" class="d-grid gap-2 col-6 mx-auto">
+        <button type="submit" class="btn btn-success btn-lg disabled">Создать заказ</button>
+    </div>
+</form>

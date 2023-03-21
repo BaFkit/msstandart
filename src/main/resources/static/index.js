@@ -18,6 +18,10 @@
                 templateUrl: 'info/info.html',
                 controller: 'infoController'
             })
+            .when('/order-create', {
+                templateUrl: 'order-create/order-create.html',
+                controller: 'orderCreateController'
+            })
             .otherwise({
                 redirectTo: '/'
             });
@@ -33,6 +37,23 @@
 
 angular.module('msstandart').controller('indexController', function ($scope, $rootScope, $http, $location, $localStorage) {
 
+
+
+    if ($localStorage.webUser) {
+        try {
+            let jwt = $localStorage.webUser.token;
+            let payload = JSON.parse(atob(jwt.split('.')[1]));
+            let currentTime = parseInt(new Date().getTime() / 1000);
+            if (currentTime > payload.exp) {
+                $scope.tryToLogout();
+                alert("Token is expired!!!");
+                delete $localStorage.webUserToken;
+                $http.defaults.headers.common.Authorization = '';
+            }
+        } catch (e) {
+        }
+    }
+
     if ($localStorage.webUser) {
         $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.webUser.token;
     }
@@ -40,11 +61,19 @@ angular.module('msstandart').controller('indexController', function ($scope, $ro
     $scope.tryToAuth = function () {
         $http.post('http://localhost:8080/auth', $scope.user)
             .then(function successCallback(response) {
+                console.log(response);
                 if (response.data.token) {
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
-                    $localStorage.webUser = {username: $scope.user.username, token: response.data.token};
+                    $localStorage.webUser = {token: response.data.token};
+                    let jwt = $localStorage.webUser.token;
+                    let payload = JSON.parse(atob(jwt.split('.')[1]));
+                    $localStorage.username = payload.sub;
+                    $localStorage.userRoles = payload.roles;
+                    console.log("role = " + $localStorage.userRoles);
+
                     $scope.user.username = null;
                     $scope.user.password = null;
+
                     $location.path('/');
                     updateDropDown()
                 }
@@ -66,6 +95,8 @@ angular.module('msstandart').controller('indexController', function ($scope, $ro
 
     $scope.clearUser = function () {
         delete $localStorage.webUser;
+        $localStorage.username = null;
+        $localStorage.userRoles = null;
         $http.defaults.headers.common.Authorization = '';
     };
 
@@ -78,9 +109,21 @@ angular.module('msstandart').controller('indexController', function ($scope, $ro
         }
     };
 
+    $rootScope.isUserRoles = function (role) {
+        let isRole = false;
+        if($localStorage.webUser) {
+            $localStorage.userRoles.forEach(function (entry) {
+                if (role === entry) {
+                    isRole = true;
+                }
+            });
+        }
+        return isRole;
+    };
+
     function updateDropDown() {
         if ($localStorage.webUser) {
-            $scope.username = $localStorage.webUser.username;
+            $scope.username = $localStorage.username;
         }
     }
 

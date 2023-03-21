@@ -1,15 +1,16 @@
 <div class="container">
     <div class="col-sm-6 col-md-10">
-        <table class="table table-hover">
+        <table class="table table-striped">
             <tr>
                 <td>Номер заказа</td>
                 <td>ФИО на памятнике</td>
                 <td>Телефон</td>
                 <td>Дата заказа</td>
                 <td>Статус</td>
+                <td>Функции</td>
             </tr>
             <tbody>
-            <tr ng-repeat="order in Orders">
+            <tr ng-repeat="order in OrdersPage.content">
                 <td>{{order.id}}</td>
                 <td>{{order.nameOnMonument}}</td>
                 <td>{{order.phone}}</td>
@@ -22,5 +23,12 @@
             </tbody>
             <p></p>
         </table>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item" ng-repeat="pageIndex in paginationArray">
+                    <button class="page-link" ng-click="loadOrders(pageIndex)">{{pageIndex}}</button>
+                </li>
+            </ul>
+        </nav>
     </div>
 </div>
