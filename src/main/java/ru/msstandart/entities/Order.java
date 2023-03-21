@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import ru.msstandart.enumeration.StatusOrder;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -47,21 +48,17 @@ public class Order {
 
     private BigDecimal workCost;
 
+    private BigDecimal installationCost;
+
     private BigDecimal orderCost;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private StatusOrder status;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-
-
-
-
-
-
-
 
 }

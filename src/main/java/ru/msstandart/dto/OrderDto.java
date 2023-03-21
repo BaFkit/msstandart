@@ -3,6 +3,7 @@ package ru.msstandart.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.msstandart.enumeration.StatusOrder;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -40,9 +41,12 @@ public class OrderDto {
 
     private BigDecimal workCost;
 
+    private BigDecimal installationCost;
+
     private BigDecimal orderCost;
 
-    private String status;
+    private StatusOrder status;
 
     private LocalDateTime createdAt;
+
 }

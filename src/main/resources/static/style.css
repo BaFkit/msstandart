@@ -1,0 +1,42 @@
+.nav-pills li a:hover {
+    background-color: #5757f3;
+}
+.nav-pills {
+    padding-left: 1rem;
+}
+
+#input-group-sm {
+    padding: 4px;
+    position: relative;
+}
+
+#navLoginField {
+    margin-bottom: 10px;
+}
+
+#navPasswordField {
+    margin-bottom: 10px;
+}
+
+#navLoginSubmit {
+    position: relative;
+    float: right;
+}
+
+#button-order-new {
+    margin-bottom: 20px;
+}
+#button-order-create {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.form-label {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.content {
+    width: 75%;
+}
+

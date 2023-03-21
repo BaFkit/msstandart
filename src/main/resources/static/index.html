@@ -62,7 +62,7 @@
                                 class="fs-4 ms-3 d-none d-sm-inline">Каталог</span>
                         </a>
                     </li>
-                    <li class="nav-item py-2 py-sm-0">
+                    <li class="nav-item py-2 py-sm-0" ng-show="isUserRoles('ROLE_ADMIN')">
                         <a href="#!/orders" class="nav-link text-white">
                             <i class="fs-5 fa fa-clipboard"></i><span
                                 class="fs-4 ms-3 d-none d-sm-inline">Заказы</span>
@@ -74,11 +74,15 @@
                                 class="fs-4 ms-3 d-none d-sm-inline">Информация</span>
                         </a>
                     </li>
-<!--                    <li class="nav-item py-2 py-sm-0">-->
-<!--                        <a href="#" class="nav-link text-white">-->
-<!--                            <i class="fs-5 fa fa-table-list"></i><span-->
-<!--                                class="fs-4 ms-3 d-none d-sm-inline">Products</span>-->
-<!--                        </a>-->
+                    <li class="nav-item py-2 py-sm-0" ng-show="isUserRoles('ROLE_ADMIN')">
+                        <a href="#" class="nav-link text-white">
+                            <i class="fs-5 fa fa-users"></i><span
+                                class="fs-4 ms-3 d-none d-sm-inline">Персонал</span>
+                        </a>
+                    </li>
+
+
+
 <!--                    </li>-->
 <!--                    <li class="nav-item py-2 py-sm-0">-->
 <!--                        <a href="#" class="nav-link text-white">-->
@@ -86,16 +90,14 @@
 <!--                                class="fs-4 ms-3 d-none d-sm-inline">Orders</span>-->
 <!--                        </a>-->
 <!--                    </li>-->
-<!--                    <li class="nav-item py-2 py-sm-0">-->
-<!--                        <a href="#" class="nav-link text-white">-->
-<!--                            <i class="fs-5 fa fa-table-list"></i><span-->
-<!--                                class="fs-4 ms-3 d-none d-sm-inline">Customers</span>-->
-<!--                        </a>-->
-<!--                    </li>-->
+
                 </ul>
             </div>
+
             <div class="dropdown open p-3" ng-show="isUserLoggedIn()">
-                <h4>{{username}}</h4>
+                <div id="button-order-new" class="d-grid gap-2">
+                    <a class="btn btn-success" href="#!/order-create" type="button">Оформить новый заказ</a>
+                </div>
                 <button class="btn border-none dropdown-toggle text-white" type="button" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-user"></i><span class="ms-2" >{{username}}</span>
@@ -107,13 +109,13 @@
                 </div>
             </div>
         </div>
-        <!--Content-->
-        <div>
+        <div class="content">
             <ng-view></ng-view>
 
             <script src="index.js"></script>
             <script src="orders/orders.js"></script>
             <script src="info/info.js"></script>
+            <script src="order-create/order-create.js"></script>
             <script src=""></script>
         </div>
     </div>
