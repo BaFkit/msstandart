@@ -1,48 +1,47 @@
-<form>
+
+<form ng-submit="tryCreateNewOrder()">
 
     <div class="mb-3">
         <label class="form-label">Заказчик:</label>
-        <input type="text" class="form-control" placeholder="Ф.И.О.">
-        <div id="textHelpName" class="form-text">Нужно указать полное имя заказчика(обязательно)</div>
+        <input type="text" class="form-control" placeholder="Ф.И.О." ng-model="newOrder.fullName" required>
+        <div id="textHelpName" class="form-text" >Нужно указать полное имя заказчика(обязательно)</div>
     </div>
 
     <div class="mb-3">
         <label class="form-label">Номер телефона:</label>
-        <input type="number" class="form-control" placeholder="Телефон">
+        <input type="number" class="form-control" placeholder="Телефон" ng-model="newOrder.phone" required>
         <div id="numberHelpPhone" class="form-text">Нужно указать номер телефона заказчика(обязательно)</div>
     </div>
 
     <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Почта:</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@mail.ru">
-        <div id="textHelpEmail" class="form-text">Электронная почта(не обязательно)</div>
-    </div>
-
-    <div class="mb-3">
         <label class="form-label">Адрес:</label>
-        <input type="text" class="form-control" placeholder="Адрес">
+        <input type="text" class="form-control" placeholder="Адрес" ng-model="newOrder.address" required>
         <div id="textHelpAddress" class="form-text">Нужно указать адрес заказчика(обязательно)</div>
     </div>
 
     <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Почта:</label>
+        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@mail.ru" ng-model="newOrder.email">
+        <div id="textHelpEmail" class="form-text">Электронная почта(не обязательно)</div>
+    </div>
+
+    <div class="mb-3">
         <label class="form-label">Артикул памятника:</label>
-        <input type="text" class="form-control" >
+        <input type="text" class="form-control" ng-model="newOrder.idStone" required>
         <div id="textHelpVendorCode" class="form-text">Нужно указать артикул памятника</div>
     </div>
 
     <div>
         <label class="form-label">Материал памятника:</label>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>...</option>
-            <option value="granite">Гранит</option>
-            <option value="marble">Мрамор</option>
+        <select class="form-select" aria-label="Default select example" ng-model="newOrder.stoneMaterial" required>
+            <option value="Гранит">Гранит</option>
+            <option value="Мрамор">Мрамор</option>
         </select>
     </div>
 
     <div>
         <label class="form-label">Размер памятника:</label>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>...</option>
+        <select class="form-select" aria-label="Default select example" ng-model="newOrder.stoneSize" required>
             <option value="80x40x6">80x40x6</option>
             <option value="100x45x7">100x45x6</option>
             <option value="100x50x7">100x50x7</option>
@@ -55,69 +54,69 @@
 
     <div class="mb-3">
         <label class="form-label">Комплект памятника:</label>
-        <input type="text" class="form-control" placeholder="2шт-100х5х8; 1шт-50х5х8; 1шт-50x12x20">
+        <input type="text" class="form-control" placeholder="2шт-100х5х8; 1шт-50х5х8; 1шт-50x12x20" ng-model="newOrder.stoneKit" required>
         <div id="textHelpStoneKit" class="form-text">Нужно указать комплект</div>
     </div>
 
     <div>
         <label class="form-label">Фигура памятника:</label>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>...</option>
+        <select class="form-select" aria-label="Default select example" ng-init="newOrder.stoneFigure = 'Без фигуры'" ng-model="newOrder.stoneFigure" required>
+            <option value="Без фигуры">Без фигуры</option>
             <option value="Волна">Волна</option>
             <option value="Полусфера">Полусфера</option>
             <option value="Арка">Арка</option>
             <option value="Тюльпан">Тюльпан</option>
             <option value="Не стандарт">Не стандарт</option>
         </select>
-        <fieldset disabled>
+
+        <fieldset ng-disabled="isNotStandard()">
             <div class="mb-3">
                 <label for="disabledTextInput" class="form-label">Указать не стандартную фигуру:</label>
-                <input type="text" id="disabledTextInput" class="form-control">
+                <input type="text" id="disabledTextInput" class="form-control" ng-model="newOrder.notStandardFigure">
             </div>
         </fieldset>
     </div>
 
     <div class="mb-3">
         <label class="form-label">ФИО на памятнике:</label>
-        <input type="text" class="form-control" placeholder="ФИО">
+        <input type="text" class="form-control" placeholder="ФИО" ng-model="newOrder.nameOnMonument" required>
         <div id="textHelpNameOnMonument" class="form-text">Нужно указать ФИО на памятнике</div>
     </div>
 
     <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">Работа на памятнике:</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" ng-model="newOrder.workPackage"></textarea>
     </div>
 
     <div class="mb-3">
         <label class="form-label">Стоимость памятника:</label>
-        <input type="number" class="form-control" placeholder="Рублей">
+        <input type="number" class="form-control" placeholder="Рублей" ng-model="newOrder.stoneCost" required>
         <div id="stoneCostHelp" class="form-text">Нужно указать стоимость памятника</div>
     </div>
 
     <div class="mb-3">
         <label class="form-label">Стоимость работы:</label>
-        <input type="number" class="form-control" placeholder="Рублей">
+        <input type="number" class="form-control" placeholder="Рублей" ng-model="newOrder.workCost" required>
         <div id="workCostHelp" class="form-text">Нужно указать стоимость работы</div>
     </div>
 
     <div class="mb-3">
         <label class="form-label">Стоимость установки:</label>
-        <input type="number" class="form-control" placeholder="Рублей">
+        <input type="number" class="form-control" placeholder="Рублей" ng-model="newOrder.installationCost" required>
         <div id="installationCostHelp" class="form-text">Нужно указать стоимость работы по установке</div>
     </div>
 
     <div class="mb-3">
         <label class="form-label">Итоговая стоимость:</label>
-        <input class="form-control" type="text" value="Readonly input here..." aria-label="readonly input example" readonly>
+        <input class="form-control" name="input-total-cost" type="text" ng-value="calculation()" ng-model = "newOrder.orderCost" readonly >
     </div>
 
-
-    <div class="d-grid gap-2 d-md-block">
-        <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off">
-        <label class="btn btn-outline-warning" for="btn-check-outlined">Проверено</label>
+    <div id="button-order-check" class="d-grid gap-2 d-md-block">
+        <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off" required>
+        <label class="btn btn-outline-warning" for="btn-check-outlined" ng-click="pressedButton()">Проверено</label>
     </div>
 
-    <div id="button-order-create" class="d-grid gap-2 col-6 mx-auto">
-        <button type="submit" class="btn btn-success btn-lg disabled">Создать заказ</button>
+    <div id="button-order-create" class="d-grid gap-2 col-6 mx-auto" ng-show="isPressedButton()">
+        <button type="submit" class="btn btn-success btn-lg">Создать заказ</button>
     </div>
 </form>

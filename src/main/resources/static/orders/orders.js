@@ -1,4 +1,4 @@
-angular.module('msstandart').controller('ordersController', function ($scope, $http) {
+angular.module('msstandart').controller('ordersController', function ($location, $localStorage, $scope, $http) {
     const contextPath = 'http://localhost:8080/api/v1/orders';
 
     $scope.loadOrders = function (pageIndex = 1) {
@@ -21,6 +21,11 @@ angular.module('msstandart').controller('ordersController', function ($scope, $h
             arr.push(i);
         }
         return arr;
+    }
+
+    $scope.goToOrder = function (id) {
+        $localStorage.orderId = id;
+        $location.path('/order-view')
     }
 
 

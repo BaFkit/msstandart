@@ -17,7 +17,7 @@
                 <td>{{order.createdAt | date: 'dd.MM.yyyy'}}</td>
                 <td>{{order.status}}</td>
                 <td>
-                    <button class="btn btn-secondary" ng-click="">Подробней</button>
+                    <button class="btn btn-secondary" ng-click="goToOrder(order.id)">Подробней</button>
                 </td>
             </tr>
             </tbody>

@@ -17,6 +17,7 @@ create table orders
     installation_cost numeric(8, 2),
     order_cost        numeric(8, 2),
     status            varchar(50),
+    preview_image_id  bigint,
     created_at        timestamp default current_timestamp,
     updated_at        timestamp default current_timestamp
 );
@@ -37,6 +38,20 @@ create table roles
     name       varchar(50) not null,
     created_at timestamp default current_timestamp,
     updated_at timestamp default current_timestamp
+);
+
+create table images
+(
+    id                  bigserial primary key,
+    name                varchar(255),
+    original_file_name  varchar(255),
+    size                bigint not null,
+    content_type        varchar(50),
+    is_preview_image    boolean,
+    bytes               bytea,
+    order_id            bigserial references orders (id),
+    created_at          timestamp default current_timestamp,
+    updated_at          timestamp default current_timestamp
 );
 
 CREATE TABLE users_roles

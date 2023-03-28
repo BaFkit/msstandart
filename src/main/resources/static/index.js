@@ -22,10 +22,16 @@
                 templateUrl: 'order-create/order-create.html',
                 controller: 'orderCreateController'
             })
+            .when('/order-view', {
+                templateUrl: 'order-view/order-view.html',
+                controller: 'ordersViewController'
+            })
             .otherwise({
                 redirectTo: '/'
             });
     }
+
+
 
     function run($rootScope, $http, $localStorage) {
         if ($localStorage.webUser) {
@@ -45,7 +51,6 @@ angular.module('msstandart').controller('indexController', function ($scope, $ro
             let payload = JSON.parse(atob(jwt.split('.')[1]));
             let currentTime = parseInt(new Date().getTime() / 1000);
             if (currentTime > payload.exp) {
-                $scope.tryToLogout();
                 alert("Token is expired!!!");
                 delete $localStorage.webUserToken;
                 $http.defaults.headers.common.Authorization = '';

@@ -33,6 +33,8 @@ public class OrderDto {
 
     private String stoneFigure;
 
+    private String notStandardFigure;
+
     private String nameOnMonument;
 
     private String workPackage;
@@ -46,6 +48,8 @@ public class OrderDto {
     private BigDecimal orderCost;
 
     private StatusOrder status;
+
+    private Long previewImageId;
 
     private LocalDateTime createdAt;
 

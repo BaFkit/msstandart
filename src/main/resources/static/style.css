@@ -31,6 +31,11 @@
     margin-bottom: 20px;
 }
 
+#button-order-check {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .form-label {
     margin-top: 20px;
     font-weight: bold;
@@ -39,4 +44,9 @@
 .content {
     width: 75%;
 }
+
+
+
+
+/*<<<<<<Order page:>>>>>>*/
 

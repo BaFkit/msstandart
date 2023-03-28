@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="row">
+        <h4>Заказ №: {{order.id}} Статус: {{order.status}}</h4>
+        <div class="col">
+            <h4>...</h4>
+        </div>
+        <div class="col shadow p-3 mb-2 bg-light text-dark border border-1">
+            <p>Заказчик: {{order.fullName}}</p>
+            <p>Телефон: {{order.phone}}</p>
+            <p>E-mail: {{order.email}}</p>
+            <p>Адрес: {{order.address}}</p>
+            <p>Дата заказа: {{order.createdAt | date: 'dd.MM.yyyy'}}</p>
+        </div>
+    </div>
+    <div>
+        <h3>Детали заказа:</h3>
+        <dl class="row shadow p-3 mb-2 bg-light text-dark border border-1">
+            <dt class="col-sm-4">Артикул памятника:</dt>
+            <dd class="col-sm-8 text-end">{{order.idStone}}</dd>
+
+            <dt class="col-sm-4">Материал памятника:</dt>
+            <dd class="col-sm-8 text-end">{{order.stoneMaterial}}</dd>
+
+            <dt class="col-sm-4">Размер стелы:</dt>
+            <dd class="col-sm-8 text-end">{{order.stoneSize}}</dd>
+
+            <dt class="col-sm-4">Фигура:</dt>
+            <dd class="col-sm-8 text-end">{{order.stoneFigure}}</dd>
+
+            <dt class="col-sm-4">Комплект памятника:</dt>
+            <dd class="col-sm-8 text-end">{{order.stoneKit}}</dd>
+
+            <dt class="col-sm-4">ФИО на памятнике:</dt>
+            <dd class="col-sm-8 text-end">{{order.nameOnMonument}}</dd>
+
+            <dt class="col-sm-4">Стоимость комплекта памятника:</dt>
+            <dd class="col-sm-8 text-end">{{order.stoneCost}} р</dd>
+
+            <dt class="col-sm-4">Стоимость работы на памятнике:</dt>
+            <dd class="col-sm-8 text-end">{{order.workCost}} р</dd>
+
+            <dt class="col-sm-4">Стоимость установки памятника:</dt>
+            <dd class="col-sm-8 text-end">{{order.installationCost}} р</dd>
+
+            <dt class="col-sm-4">Перечень работ:</dt>
+            <dd class="col-sm-8 text-end">{{order.workPackage}}</dd>
+        </dl>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <div class="shadow p-3 mb-2 bg-light text-dark border border-1">
+                <h4>Итоговая стоимость:</h4>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="shadow p-3 mb-2 bg-light text-dark text-end border border-1">
+                <h4>{{order.orderCost}} р</h4>
+            </div>
+        </div>
+    </div>
+</div>
