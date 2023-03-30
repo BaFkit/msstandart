@@ -33,6 +33,8 @@ public class OrderService {
    public void saveOrder(OrderDto orderDto) {
       Order order = EntityDtoMapper.INSTANCE.toEntity(orderDto);
       if (orderDto.getNotStandardFigure() != null) order.setStoneFigure(orderDto.getNotStandardFigure());
+      if (orderDto.getNotStandardSize() != null) order.setStoneSize(orderDto.getNotStandardSize());
+      if (orderDto.getDateOnMonument1() != null && orderDto.getDateOnMonument2() != null) order.setDateOnMonument(orderDto.getDateOnMonument1() + " - " + orderDto.getDateOnMonument2());
       order.setStatus(StatusOrder.Подписание);
       orderRepository.save(order);
    }

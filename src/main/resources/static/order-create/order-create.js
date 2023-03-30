@@ -29,15 +29,51 @@ angular.module('msstandart').controller('orderCreateController', function ($scop
         }
     }
 
-    $scope.isNotStandard = function () {
+    $scope.isNotStandardFigure = function () {
         if ($scope.newOrder.stoneFigure !== "Не стандарт") {
             return true;
         } else {
             return false;
         }
     }
+    $scope.isNotStandardSize = function () {
+        if ($scope.newOrder.stoneSize !== "Не стандарт") {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-    $scope.calculation = function () {
-       return  $scope.newOrder.orderCost = ($scope.newOrder.stoneCost + $scope.newOrder.workCost + $scope.newOrder.installationCost);
+
+    $scope.calculationMonumentCost = function () {
+        return $scope.newOrder.stoneCost =  $scope.newOrder.monumentCost +  $scope.newOrder.stoneKitCost;
+    }
+    $scope.calculationWorksOnMonumentCost = function () {
+        return $scope.newOrder.workCost =
+            $scope.newOrder.nameOnMonumentCost
+            + $scope.newOrder.dateOnMonumentCost
+            + $scope.newOrder.holesInStandCost
+            + $scope.newOrder.crucifixCost
+            + $scope.newOrder.flowersCost
+            + $scope.newOrder.pictureOneCost
+            + $scope.newOrder.pictureTwoCost
+            + $scope.newOrder.pictureThreeCost
+            + $scope.newOrder.frameCost
+            + $scope.newOrder.epitaphCost
+            + $scope.newOrder.otherWorksOnMonumentCost;
+    }
+    $scope.calculationInstallationCost = function () {
+        return $scope.newOrder.installationCost = $scope.newOrder.monumentInstallationCost + $scope.newOrder.otherInstallationCost;
+    }
+
+    $scope.calculationTotal = function () {
+       return  $scope.newOrder.orderCost = $scope.newOrder.stoneCost + $scope.newOrder.workCost + $scope.newOrder.installationCost;
+    }
+
+    $scope.countLetters = function (letters) {
+        if (letters === null) return 0;
+        if (letters !== "") {
+            return  letters.match(/[a-zA-Zа-яА-Я]/g).length;
+        }
     }
 });

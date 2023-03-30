@@ -50,3 +50,10 @@
 
 /*<<<<<<Order page:>>>>>>*/
 
+.order-create-hr {
+    margin: 20px 0;
+    padding: 0;
+    height: 0;
+    border: none;
+    box-shadow: 0 0 10px 1px black;
+}
