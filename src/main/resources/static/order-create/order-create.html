@@ -1,16 +1,23 @@
-
 <form ng-submit="tryCreateNewOrder()">
 
     <div class="mb-3">
         <label class="form-label">Заказчик:</label>
         <input type="text" class="form-control" placeholder="Ф.И.О." ng-model="newOrder.fullName" required>
-        <div id="textHelpName" class="form-text" >Нужно указать полное имя заказчика(обязательно)</div>
+        <div id="textHelpName" class="form-text">Нужно указать полное имя заказчика(обязательно)</div>
     </div>
 
     <div class="mb-3">
         <label class="form-label">Номер телефона:</label>
-        <input type="number" class="form-control" placeholder="Телефон" ng-model="newOrder.phone" required>
+        <input type="tel" pattern="tel" class="form-control" placeholder="Телефон" ng-model="newOrder.phone" required>
         <div id="numberHelpPhone" class="form-text">Нужно указать номер телефона заказчика(обязательно)</div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Дополнительный номер телефона:</label>
+        <input type="tel" pattern="tel" class="form-control" placeholder="Доп. Телефон" ng-model="newOrder.phoneSecond"
+               required>
+        <div id="numberSecondHelpPhone" class="form-text">Нужно указать дополнительный номер телефона(не обязательно)
+        </div>
     </div>
 
     <div class="mb-3">
@@ -21,46 +28,84 @@
 
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Почта:</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@mail.ru" ng-model="newOrder.email">
+        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@mail.ru"
+               ng-model="newOrder.email">
         <div id="textHelpEmail" class="form-text">Электронная почта(не обязательно)</div>
     </div>
 
+    <hr class="order-create-hr">
+
     <div class="mb-3">
-        <label class="form-label">Артикул памятника:</label>
-        <input type="text" class="form-control" ng-model="newOrder.idStone" required>
-        <div id="textHelpVendorCode" class="form-text">Нужно указать артикул памятника</div>
+        <div class="row">
+            <div class="col-8">
+                <label class="form-label">Артикул памятника:</label>
+                <input type="text" class="form-control" ng-model="newOrder.idStone" required>
+                <div id="textHelpVendorCode" class="form-text">Нужно указать артикул памятника</div>
+            </div>
+            <div class="col-4">
+                <label for="monumentCostInput" class="form-label">Указать стоимость памятника:</label>
+                <input type="number" id="monumentCostInput" class="form-control" ng-init="newOrder.monumentCost = 0" ng-model="newOrder.monumentCost">
+            </div>
+        </div>
     </div>
 
     <div>
         <label class="form-label">Материал памятника:</label>
-        <select class="form-select" aria-label="Default select example" ng-model="newOrder.stoneMaterial" required>
+        <select class="form-select" ng-model="newOrder.stoneMaterial" required>
             <option value="Гранит">Гранит</option>
             <option value="Мрамор">Мрамор</option>
         </select>
     </div>
 
     <div>
-        <label class="form-label">Размер памятника:</label>
-        <select class="form-select" aria-label="Default select example" ng-model="newOrder.stoneSize" required>
+        <label class="form-label">Полировка памятника:</label>
+        <select class="form-select" ng-model="newOrder.stonePolishing" required>
+            <option value="Лицева">Лицева полировка</option>
+            <option value="Лицева+Торцы">Лицева + Торцы</option>
+            <option value="Полная">Полная полировка</option>
+        </select>
+    </div>
+
+    <div>
+        <label class="form-label">Размер стелы:</label>
+        <select class="form-select" ng-model="newOrder.stoneSize" required>
             <option value="80x40x6">80x40x6</option>
             <option value="100x45x7">100x45x6</option>
             <option value="100x50x7">100x50x7</option>
             <option value="110x50x7">110x50x7</option>
             <option value="110x60x7">110x60x7</option>
             <option value="120x60x7">120x60x7</option>
+            <option value="Не стандарт">Не стандарт</option>
         </select>
     </div>
+    <fieldset ng-disabled="isNotStandardSize()">
+        <div class="mb-3">
+            <label for="disabledSizeInput" class="form-label">Указать не стандартный размер:</label>
+            <input type="text" id="disabledSizeInput" class="form-control" ng-model="newOrder.notStandardSize">
+        </div>
+    </fieldset>
 
 
     <div class="mb-3">
-        <label class="form-label">Комплект памятника:</label>
-        <input type="text" class="form-control" placeholder="2шт-100х5х8; 1шт-50х5х8; 1шт-50x12x20" ng-model="newOrder.stoneKit" required>
-        <div id="textHelpStoneKit" class="form-text">Нужно указать комплект</div>
+        <div class="row">
+            <div class="col-8">
+                <label class="form-label">Комплект памятника:</label>
+                <input type="text" class="form-control" placeholder="2шт-100х5х8; 1шт-50х5х8; 1шт-50x12x20"
+                       ng-model="newOrder.stoneKit" required>
+                <div id="textHelpStoneKit" class="form-text">Нужно указать комплект</div>
+            </div>
+            <div class="col-4">
+                <label for="stoneKitCostInput" class="form-label">Указать дополнительную стоимость:</label>
+                <input type="number" id="stoneKitCostInput" class="form-control" ng-init="newOrder.stoneKitCost = 0" ng-model="newOrder.stoneKitCost">
+                <div id="textHelpStoneKitCost" class="form-text">Без учета стандартного комплекта</div>
+            </div>
+        </div>
     </div>
 
     <div>
         <label class="form-label">Фигура памятника:</label>
-        <select class="form-select" aria-label="Default select example" ng-init="newOrder.stoneFigure = 'Без фигуры'" ng-model="newOrder.stoneFigure" required>
+        <select class="form-select" aria-label="Default select example" ng-init="newOrder.stoneFigure = 'Без фигуры'"
+                ng-model="newOrder.stoneFigure" required>
             <option value="Без фигуры">Без фигуры</option>
             <option value="Волна">Волна</option>
             <option value="Полусфера">Полусфера</option>
@@ -69,47 +114,368 @@
             <option value="Не стандарт">Не стандарт</option>
         </select>
 
-        <fieldset ng-disabled="isNotStandard()">
+        <fieldset ng-disabled="isNotStandardFigure()">
             <div class="mb-3">
-                <label for="disabledTextInput" class="form-label">Указать не стандартную фигуру:</label>
-                <input type="text" id="disabledTextInput" class="form-control" ng-model="newOrder.notStandardFigure">
+                <label for="disabledFigureInput" class="form-label">Указать не стандартную фигуру:</label>
+                <input type="text" id="disabledFigureInput" class="form-control" ng-model="newOrder.notStandardFigure">
             </div>
         </fieldset>
     </div>
 
+    <hr class="order-create-hr">
+    <!--    <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Работа на памятнике>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+
+    <h4 class="form-label">Работа на памятнике:</h4>
+
     <div class="mb-3">
         <label class="form-label">ФИО на памятнике:</label>
-        <input type="text" class="form-control" placeholder="ФИО" ng-model="newOrder.nameOnMonument" required>
-        <div id="textHelpNameOnMonument" class="form-text">Нужно указать ФИО на памятнике</div>
+        <input type="text" class="form-control" placeholder="ФИО" ng-init="newOrder.nameOnMonument = '' "
+               ng-model="newOrder.nameOnMonument" ng-model-options="{ getterSetter: true }" required>
+        <div class="row row-cols-auto">
+            <div class="col-sm-2">
+                <input type="number" class="form-control" readonly ng-model="countLetters(newOrder.nameOnMonument)"
+                       ng-model-options="{ getterSetter: true }">
+            </div>
+            <div>
+                <span class="form-label"> - букв; стоимость:</span>
+            </div>
+            <div class="col">
+                <input type="number" class="form-control" ng-value="countLetters(newOrder.nameOnMonument) * 35"
+                       ng-init="newOrder.nameOnMonumentCost = 0" ng-model="newOrder.nameOnMonumentCost" ng-model-options="{ getterSetter: true }" readonly>
+            </div>
+            <div>
+                <span class="form-label"> руб.</span>
+            </div>
+        </div>
     </div>
 
     <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Работа на памятнике:</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" ng-model="newOrder.workPackage"></textarea>
+        <label class="form-label">Даты на памятник:</label>
+        <div class="row row-cols-auto">
+            <div class="col">
+                <input type="date" class="form-control" ng-model="newOrder.dateOnMonument1" required>
+                <div id="textHelpDateOnMonument1" class="form-text">Нужно выбрать дату</div>
+            </div>
+            <div class="col">
+                <input type="date" class="form-control" ng-model="newOrder.dateOnMonument2" required>
+                <div id="textHelpDateOnMonument2" class="form-text">Нужно выбрать дату</div>
+            </div>
+            <div class="col">
+                <span class="form-label">Стоимость:</span>
+            </div>
+            <div class="col">
+                <input type="number" class="form-control" ng-init="newOrder.dateOnMonumentCost = 0" ng-model="newOrder.dateOnMonumentCost">
+                <div id="textHelpDateOnMonumentCost" class="form-text">Нужно указать стоимость</div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="order-create-hr">
+
+    <div class="mb-3">
+        <label class="form-label">Колличество отверствий под штыри:</label>
+        <div class="row row-cols-auto">
+            <div class="col">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="inlineCheckbox0" value="0"
+                           ng-model="newOrder.holesInStand">
+                    <label class="form-check-label" for="inlineCheckbox1">Без отверстий</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="inlineCheckbox1" value="1"
+                           ng-model="newOrder.holesInStand">
+                    <label class="form-check-label" for="inlineCheckbox1">1 отв.</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="inlineCheckbox2" value="2" ng-checked="true"
+                           ng-model="newOrder.holesInStand">
+                    <label class="form-check-label" for="inlineCheckbox2">2 отв.</label>
+                </div>
+            </div>
+            <div class="col">
+                <span class="form-label">Стоимость: </span>
+            </div>
+            <div class="col">
+                <input type="number" class="form-control" ng-init="newOrder.holesInStandCost = 0" ng-model="newOrder.holesInStandCost">
+                <div id="textHelpHolesInStandCost" class="form-text">Нужно указать стоимость</div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="order-create-hr">
+    <!--    <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Доп.Работа на памятнике>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+
+    <div class="mb-3">
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefaultCrucifix"
+                   ng-model="checkedCrucifix">
+            <label class="form-check-label" for="flexSwitchCheckDefaultCrucifix">Крест</label>
+            <div class="check-element animate-show-hide" ng-hide="!checkedCrucifix">
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <label for="crucifixInput" class="form-label">Указать вид креста на памятник:</label>
+                            <input type="text" id="crucifixInput" class="form-control" ng-model="newOrder.crucifix">
+                        </div>
+                        <div class="col-4">
+                            <label for="crucifixInput" class="form-label">Указать стоимость креста:</label>
+                            <input type="number" id="crucifixCostInput" class="form-control"
+                                   ng-init="newOrder.crucifixCost = 0" ng-model="newOrder.crucifixCost">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="mb-3">
-        <label class="form-label">Стоимость памятника:</label>
-        <input type="number" class="form-control" placeholder="Рублей" ng-model="newOrder.stoneCost" required>
-        <div id="stoneCostHelp" class="form-text">Нужно указать стоимость памятника</div>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefaultFlowers"
+                   ng-model="checkedFlowers">
+            <label class="form-check-label" for="flexSwitchCheckDefaultFlowers">Цветы</label>
+            <div class="check-element animate-show-hide" ng-hide="!checkedFlowers">
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <label for="flowersInput" class="form-label">Указать вид и колличество цветов на
+                                памятник:</label>
+                            <input type="text" id="flowersInput" class="form-control" ng-model="newOrder.flowers">
+                        </div>
+                        <div class="col-4">
+                            <label for="crucifixInput" class="form-label">Указать стоимость цветов:</label>
+                            <input type="number" id="flowersCostInput" class="form-control"
+                                   ng-init="newOrder.flowersCost = 0" ng-model="newOrder.flowersCost">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="mb-3">
-        <label class="form-label">Стоимость работы:</label>
-        <input type="number" class="form-control" placeholder="Рублей" ng-model="newOrder.workCost" required>
-        <div id="workCostHelp" class="form-text">Нужно указать стоимость работы</div>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefaultFrame" ng-model="checkedFrame">
+            <label class="form-check-label" for="flexSwitchCheckDefaultFrame">Рамка</label>
+            <div class="check-element animate-show-hide" ng-hide="!checkedFrame">
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <label for="frameInput" class="form-label">Указать вид рамки на памятник:</label>
+                            <input type="text" id="frameInput" class="form-control" ng-model="newOrder.frame">
+                        </div>
+                        <div class="col-4">
+                            <label for="frameInput" class="form-label">Указать стоимость рамки:</label>
+                            <input type="number" id="frameCostInput" class="form-control"
+                                   ng-init="newOrder.frameCost = 0" ng-model="newOrder.frameCost">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="mb-3">
-        <label class="form-label">Стоимость установки:</label>
-        <input type="number" class="form-control" placeholder="Рублей" ng-model="newOrder.installationCost" required>
-        <div id="installationCostHelp" class="form-text">Нужно указать стоимость работы по установке</div>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefaultPictureOne"
+                   ng-model="checkedPictureOne">
+            <label class="form-check-label" for="flexSwitchCheckDefaultPictureOne">Дополнительный рисунок 1</label>
+            <div class="check-element animate-show-hide" ng-hide="!checkedPictureOne">
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <label for="pictureOneInput" class="form-label">Указать вид и описание рисунка на
+                                памятник:</label>
+                            <input type="text" id="pictureOneInput" class="form-control" ng-model="newOrder.pictureOne">
+                        </div>
+                        <div class="col-4">
+                            <label for="pictureOneInput" class="form-label">Указать стоимость рисунка:</label>
+                            <input type="number" id="pictureOneCostInput" class="form-control"
+                                   ng-init="newOrder.pictureOneCost = 0" ng-model="newOrder.pictureOneCost">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefaultPictureTwo"
+                   ng-model="checkedPictureTwo">
+            <label class="form-check-label" for="flexSwitchCheckDefaultPictureTwo">Дополнительный рисунок 2</label>
+            <div class="check-element animate-show-hide" ng-hide="!checkedPictureTwo">
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <label for="pictureTwoInput" class="form-label">Указать вид и описание рисунка на
+                                памятник:</label>
+                            <input type="text" id="pictureTwoInput" class="form-control" ng-model="newOrder.pictureTwo">
+                        </div>
+                        <div class="col-4">
+                            <label for="pictureTwoInput" class="form-label">Указать стоимость рисунка:</label>
+                            <input type="number" id="pictureTwoCostInput" class="form-control"
+                                   ng-init="newOrder.pictureTwoCost = 0" ng-model="newOrder.pictureTwoCost">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefaultPictureThree"
+                   ng-model="checkedPictureThree">
+            <label class="form-check-label" for="flexSwitchCheckDefaultPictureThree">Дополнительный рисунок 3</label>
+            <div class="check-element animate-show-hide" ng-hide="!checkedPictureThree">
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <label for="pictureThreeInput" class="form-label">Указать вид и описание рисунка на
+                                памятник:</label>
+                            <input type="text" id="pictureThreeInput" class="form-control"
+                                   ng-model="newOrder.pictureThree">
+                        </div>
+                        <div class="col-4">
+                            <label for="pictureThreeInput" class="form-label">Указать стоимость рисунка:</label>
+                            <input type="number" id="pictureThreeCostInput" class="form-control"
+                                   ng-init="newOrder.pictureThreeCost = 0" ng-model="newOrder.pictureThreeCost">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="mb-3">
-        <label class="form-label">Итоговая стоимость:</label>
-        <input class="form-control" name="input-total-cost" type="text" ng-value="calculation()" ng-model = "newOrder.orderCost" readonly >
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefaultEpitaph"
+                   ng-model="checkedEpitaph">
+            <label class="form-check-label" for="flexSwitchCheckDefaultEpitaph">Эпитафия</label>
+            <div class="check-element animate-show-hide" ng-hide="!checkedEpitaph">
+                <div class="mb-3">
+                    <div>
+                        <label for="exampleFormControlTextareaEpitaph" class="form-label">Эпитафия:</label>
+                        <textarea class="form-control" id="exampleFormControlTextareaEpitaph" rows="5"
+                                  ng-init="newOrder.epitaph = '' "
+                                  ng-model="newOrder.epitaph" ng-model-options="{ getterSetter: true }"></textarea>
+                    </div>
+                    <div class="row row-cols-auto">
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" readonly ng-model="countLetters(newOrder.epitaph)"
+                                   ng-model-options="{ getterSetter: true }">
+                        </div>
+                        <div>
+                            <span class="form-label"> - букв; стоимость:</span>
+                        </div>
+                        <div class="col">
+                            <input type="number" class="form-control" ng-value="countLetters(newOrder.epitaph) * 35"
+                                   ng-init="newOrder.epitaphCost = 0" ng-model="newOrder.epitaphCost" ng-model-options="{ getterSetter: true }" readonly>
+                        </div>
+                        <div>
+                            <span class="form-label"> руб.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div class="mb-3">
+        <div class="row">
+            <div class="col-8">
+                <label for="otherWorksOnMonumentTextarea1" class="form-label">Дополнительная работа на памятнике:</label>
+                <textarea class="form-control" id="otherWorksOnMonumentTextarea1" rows="3"
+                          ng-model="newOrder.otherWorksOnMonument"></textarea>
+            </div>
+            <div class="col-4">
+                <label for="otherWorksOnMonumentCostInput" class="form-label">Стоимость дополнительных работ на
+                    памятнике:</label>
+                <input type="number" id="otherWorksOnMonumentCostInput" class="form-control"
+                       ng-init="newOrder.otherWorksOnMonumentCost = 0" ng-model="newOrder.otherWorksOnMonumentCost">
+            </div>
+        </div>
+    </div>
+
+    <hr class="order-create-hr">
+    <!--    <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Установка>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+
+    <div class="mb-3">
+        <div class="form-check form-label form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefaultInstallation"
+                   ng-model="checkedInstallation">
+            <label class="form-check-label" for="flexSwitchCheckDefaultInstallation">Установка:</label>
+            <div class="check-element animate-show-hide" ng-hide="!checkedInstallation">
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <label class="form-label">Место установки памятника:</label>
+                            <input type="text" class="form-control" ng-model="newOrder.installationLocation">
+                            <div id="textHelpInstallationLocation" class="form-text">Нужно указать название и месторасположение кладбища</div>
+                        </div>
+                        <div class="col-4">
+                            <label for="monumentCostInput" class="form-label">Стоимость установки:</label>
+                            <input type="number" id="installationCostInput" class="form-control"
+                                   ng-init="newOrder.monumentInstallationCost = 0" ng-model="newOrder.monumentInstallationCost">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <label class="form-label">Дополнительная работа по установки и монтажу:</label>
+                            <input type="text" class="form-control" ng-model="newOrder.otherInstallation">
+                            <div id="textHelpOtherInstallation" class="form-text">Нужно указать дополнительные ввиды работ или установок, в том числе других изделий</div>
+                        </div>
+                        <div class="col-4">
+                            <label for="otherInstallationCostInput" class="form-label">Стоимость дополнительных работ:</label>
+                            <input type="number" id="otherInstallationCostInput" class="form-control"
+                                   ng-init="newOrder.otherInstallationCost = 0" ng-model="newOrder.otherInstallationCost">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="order-create-hr">
+    <!--    <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+    <div class="mb-3">
+        <label for="exampleFormControlOtherInfo" class="form-label">Дополнительная информация:</label>
+        <textarea class="form-control" id="exampleFormControlOtherInfo" rows="3"
+                  ng-model="newOrder.otherInfo"></textarea>
+    </div>
+
+    <hr class="order-create-hr">
+    <!--    <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+
+
+    <div class="mb-3">
+        <label class="form-label">Полная стоимость памятника:</label>
+        <input type="number" class="form-control" placeholder="Рублей" ng-value="calculationMonumentCost()" ng-model="newOrder.stoneCost" required readonly>
+<!--        <div id="stoneCostHelp" class="form-text">Нужно указать стоимость памятника</div>-->
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Полная стоимость работ на памятнике:</label>
+        <input type="number" class="form-control" placeholder="Рублей" ng-value="calculationWorksOnMonumentCost()" ng-model="newOrder.workCost" required readonly>
+<!--        <div id="workCostHelp" class="form-text">Нужно указать стоимость работы</div>-->
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Полная стоимость установки памятника и дополнительным работам:</label>
+        <input type="number" class="form-control" placeholder="Рублей" ng-value="calculationInstallationCost()" ng-model="newOrder.installationCost" required readonly>
+<!--        <div id="installationCostHelp" class="form-text">Нужно указать стоимость работы по установке</div>-->
+    </div>
+
+    <div class="mb-3">
+        <h3><label class="form-label">Итоговая стоимость:</label></h3>
+        <input class="form-control" name="input-total-cost" type="text" ng-value="calculationTotal()" ng-model="newOrder.orderCost" required readonly>
+    </div>
+
+    <hr class="order-create-hr">
+    <!--    <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+
+
 
     <div id="button-order-check" class="d-grid gap-2 d-md-block">
         <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off" required>
