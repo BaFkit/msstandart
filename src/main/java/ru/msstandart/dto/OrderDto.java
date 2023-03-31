@@ -61,6 +61,18 @@ public class OrderDto {
 
     private BigDecimal holesInStandCost;
 
+    private String portrait;
+
+    private BigDecimal portraitCost;
+
+    private BigDecimal portraitFasteningCost;
+
+    private String tile;
+
+    private BigDecimal tileCost;
+
+    private BigDecimal tileFasteningCost;
+
     private String crucifix;
 
     private BigDecimal crucifixCost;
@@ -103,8 +115,6 @@ public class OrderDto {
 
     private String otherInfo;
 
-
-
     private BigDecimal stoneCost;
 
     private BigDecimal workCost;
@@ -112,8 +122,6 @@ public class OrderDto {
     private BigDecimal installationCost;
 
     private BigDecimal orderCost;
-
-
 
     private StatusOrder status;
 

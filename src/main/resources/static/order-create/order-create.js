@@ -50,17 +50,21 @@ angular.module('msstandart').controller('orderCreateController', function ($scop
     }
     $scope.calculationWorksOnMonumentCost = function () {
         return $scope.newOrder.workCost =
-            $scope.newOrder.nameOnMonumentCost
-            + $scope.newOrder.dateOnMonumentCost
-            + $scope.newOrder.holesInStandCost
-            + $scope.newOrder.crucifixCost
-            + $scope.newOrder.flowersCost
-            + $scope.newOrder.pictureOneCost
-            + $scope.newOrder.pictureTwoCost
-            + $scope.newOrder.pictureThreeCost
-            + $scope.newOrder.frameCost
-            + $scope.newOrder.epitaphCost
-            + $scope.newOrder.otherWorksOnMonumentCost;
+            $scope.newOrder.nameOnMonumentCost +
+            $scope.newOrder.dateOnMonumentCost +
+            $scope.newOrder.holesInStandCost +
+            $scope.newOrder.portraitCost +
+            $scope.newOrder.portraitFasteningCost +
+            $scope.newOrder.tileCost +
+            $scope.newOrder.tileFasteningCost +
+            $scope.newOrder.crucifixCost +
+            $scope.newOrder.flowersCost +
+            $scope.newOrder.pictureOneCost +
+            $scope.newOrder.pictureTwoCost +
+            $scope.newOrder.pictureThreeCost +
+            $scope.newOrder.frameCost +
+            $scope.newOrder.epitaphCost +
+            $scope.newOrder.otherWorksOnMonumentCost;
     }
     $scope.calculationInstallationCost = function () {
         return $scope.newOrder.installationCost = $scope.newOrder.monumentInstallationCost + $scope.newOrder.otherInstallationCost;
@@ -70,10 +74,20 @@ angular.module('msstandart').controller('orderCreateController', function ($scop
        return  $scope.newOrder.orderCost = $scope.newOrder.stoneCost + $scope.newOrder.workCost + $scope.newOrder.installationCost;
     }
 
-    $scope.countLetters = function (letters) {
-        if (letters === null) return 0;
+    $scope.countLettersNameOnMonument = function (letters) {
+        let lettersLength;
         if (letters !== "") {
-            return  letters.match(/[a-zA-Zа-яА-Я]/g).length;
+            lettersLength = letters.match(/[a-zA-Zа-яА-Я]/g).length;
+            $scope.newOrder.nameOnMonumentCost = lettersLength * 35;
+            return lettersLength;
+        }
+    }
+    $scope.countLettersEpitaph = function (letters) {
+        let lettersLength;
+        if (letters !== "") {
+            lettersLength = letters.match(/[a-zA-Zа-яА-Я]/g).length;
+            $scope.newOrder.epitaphCost = lettersLength * 35;
+            return lettersLength;
         }
     }
 });
