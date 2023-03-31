@@ -63,6 +63,18 @@ public class Order {
 
     private BigDecimal holesInStandCost;
 
+    private String portrait;
+
+    private BigDecimal portraitCost;
+
+    private BigDecimal portraitFasteningCost;
+
+    private String tile;
+
+    private BigDecimal tileCost;
+
+    private BigDecimal tileFasteningCost;
+
     private String crucifix;
 
     private BigDecimal crucifixCost;
@@ -105,8 +117,6 @@ public class Order {
 
     private String otherInfo;
 
-
-
     private BigDecimal stoneCost;
 
     private BigDecimal workCost;
@@ -114,8 +124,6 @@ public class Order {
     private BigDecimal installationCost;
 
     private BigDecimal orderCost;
-
-
 
     @Enumerated(EnumType.STRING)
     private StatusOrder status;

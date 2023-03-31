@@ -8,13 +8,13 @@
 
     <div class="mb-3">
         <label class="form-label">Номер телефона:</label>
-        <input type="tel" pattern="tel" class="form-control" placeholder="Телефон" ng-model="newOrder.phone" required>
+        <input type="number" class="form-control" placeholder="Телефон" ng-model="newOrder.phone" required>
         <div id="numberHelpPhone" class="form-text">Нужно указать номер телефона заказчика(обязательно)</div>
     </div>
 
     <div class="mb-3">
         <label class="form-label">Дополнительный номер телефона:</label>
-        <input type="tel" pattern="tel" class="form-control" placeholder="Доп. Телефон" ng-model="newOrder.phoneSecond"
+        <input type="number" class="form-control" placeholder="Доп. Телефон" ng-model="newOrder.phoneSecond"
                required>
         <div id="numberSecondHelpPhone" class="form-text">Нужно указать дополнительный номер телефона(не обязательно)
         </div>
@@ -39,7 +39,7 @@
         <div class="row">
             <div class="col-8">
                 <label class="form-label">Артикул памятника:</label>
-                <input type="text" class="form-control" ng-model="newOrder.idStone" required>
+                <input type="text" class="form-control" ng-model="newOrder.vendorCode" required>
                 <div id="textHelpVendorCode" class="form-text">Нужно указать артикул памятника</div>
             </div>
             <div class="col-4">
@@ -131,17 +131,17 @@
         <label class="form-label">ФИО на памятнике:</label>
         <input type="text" class="form-control" placeholder="ФИО" ng-init="newOrder.nameOnMonument = '' "
                ng-model="newOrder.nameOnMonument" ng-model-options="{ getterSetter: true }" required>
+        <div id="textHelpNameOnMonument" class="form-text">Нужно указать ФИО для гравировки на памятник</div>
         <div class="row row-cols-auto">
             <div class="col-sm-2">
-                <input type="number" class="form-control" readonly ng-model="countLetters(newOrder.nameOnMonument)"
+                <input type="number" class="form-control" readonly ng-model="countLettersNameOnMonument(newOrder.nameOnMonument)"
                        ng-model-options="{ getterSetter: true }">
             </div>
             <div>
-                <span class="form-label"> - букв; стоимость:</span>
+                <span class="form-label"> - букв; стоимостью:</span>
             </div>
             <div class="col">
-                <input type="number" class="form-control" ng-value="countLetters(newOrder.nameOnMonument) * 35"
-                       ng-init="newOrder.nameOnMonumentCost = 0" ng-model="newOrder.nameOnMonumentCost" ng-model-options="{ getterSetter: true }" readonly>
+                <input type="number" class="form-control" ng-init="newOrder.nameOnMonumentCost = 0" ng-model="newOrder.nameOnMonumentCost" readonly>
             </div>
             <div>
                 <span class="form-label"> руб.</span>
@@ -204,6 +204,60 @@
 
     <hr class="order-create-hr">
     <!--    <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Доп.Работа на памятнике>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+
+    <div class="mb-3">
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefaultPortrait"
+                   ng-model="checkedPortrait">
+            <label class="form-check-label" for="flexSwitchCheckDefaultPortrait">Портрет или Фото</label>
+            <div class="check-element animate-show-hide" ng-hide="!checkedPortrait">
+                <div class="mb-3">
+                        <div>
+                            <label for="portraitInput" class="form-label">Указать вид и размер портрета или фото на памятник:</label>
+                            <input type="text" id="portraitInput" class="form-control" ng-model="newOrder.portrait">
+                        </div>
+                        <div class="col-3">
+                            <label for="portraitCostInput" class="form-label">Стоимость:</label>
+                            <input type="number" id="portraitCostInput" class="form-control"
+                                   ng-init="newOrder.portraitCost = 0" ng-model="newOrder.portraitCost">
+                        </div>
+                        <div class="col-3">
+                            <label for="portraitFasteningCostInput" class="form-label">Стоимость крепления фото</label>
+                            <input type="number" id="portraitFasteningCostInput" class="form-control"
+                                   ng-init="newOrder.portraitFasteningCost = 0" ng-model="newOrder.portraitFasteningCost">
+                            <div id="textHelpPortraitFasteningCost" class="form-text">Если требуется крепление к памятнику</div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefaultTile"
+                   ng-model="checkedTile">
+            <label class="form-check-label" for="flexSwitchCheckDefaultTile">Плитка</label>
+            <div class="check-element animate-show-hide" ng-hide="!checkedTile">
+                <div class="mb-3">
+                    <div>
+                        <label for="tileInput" class="form-label">Указать материал и размер плитки на памятник:</label>
+                        <input type="text" id="tileInput" class="form-control" ng-model="newOrder.tile">
+                    </div>
+                    <div class="col-3">
+                        <label for="tileCostInput" class="form-label">Стоимость плитки:</label>
+                        <input type="number" id="tileCostInput" class="form-control"
+                               ng-init="newOrder.tileCost = 0" ng-model="newOrder.tileCost">
+                    </div>
+                    <div class="col-3">
+                        <label for="tileFasteningCostInput" class="form-label">Стоимость крепления плитки</label>
+                        <input type="number" id="tileFasteningCostInput" class="form-control"
+                               ng-init="newOrder.tileFasteningCost = 0" ng-model="newOrder.tileFasteningCost">
+                        <div id="textHelpTileFasteningCost" class="form-text">Если требуется крепление к памятнику</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="mb-3">
         <div class="form-check form-switch">
@@ -360,15 +414,14 @@
                     </div>
                     <div class="row row-cols-auto">
                         <div class="col-sm-2">
-                            <input type="number" class="form-control" readonly ng-model="countLetters(newOrder.epitaph)"
+                            <input type="number" class="form-control" readonly ng-model="countLettersEpitaph(newOrder.epitaph)"
                                    ng-model-options="{ getterSetter: true }">
                         </div>
                         <div>
                             <span class="form-label"> - букв; стоимость:</span>
                         </div>
                         <div class="col">
-                            <input type="number" class="form-control" ng-value="countLetters(newOrder.epitaph) * 35"
-                                   ng-init="newOrder.epitaphCost = 0" ng-model="newOrder.epitaphCost" ng-model-options="{ getterSetter: true }" readonly>
+                            <input type="number" class="form-control" ng-init="newOrder.epitaphCost = 0" ng-model="newOrder.epitaphCost" ng-model-options="{ getterSetter: true }" readonly>
                         </div>
                         <div>
                             <span class="form-label"> руб.</span>
@@ -451,20 +504,17 @@
 
     <div class="mb-3">
         <label class="form-label">Полная стоимость памятника:</label>
-        <input type="number" class="form-control" placeholder="Рублей" ng-value="calculationMonumentCost()" ng-model="newOrder.stoneCost" required readonly>
-<!--        <div id="stoneCostHelp" class="form-text">Нужно указать стоимость памятника</div>-->
+        <input type="number" class="form-control" ng-value="calculationMonumentCost()" ng-model="newOrder.stoneCost" required readonly>
     </div>
 
     <div class="mb-3">
         <label class="form-label">Полная стоимость работ на памятнике:</label>
-        <input type="number" class="form-control" placeholder="Рублей" ng-value="calculationWorksOnMonumentCost()" ng-model="newOrder.workCost" required readonly>
-<!--        <div id="workCostHelp" class="form-text">Нужно указать стоимость работы</div>-->
+        <input type="number" class="form-control" ng-value="calculationWorksOnMonumentCost()" ng-model="newOrder.workCost" required readonly>
     </div>
 
     <div class="mb-3">
         <label class="form-label">Полная стоимость установки памятника и дополнительным работам:</label>
-        <input type="number" class="form-control" placeholder="Рублей" ng-value="calculationInstallationCost()" ng-model="newOrder.installationCost" required readonly>
-<!--        <div id="installationCostHelp" class="form-text">Нужно указать стоимость работы по установке</div>-->
+        <input type="number" class="form-control" ng-value="calculationInstallationCost()" ng-model="newOrder.installationCost" required readonly>
     </div>
 
     <div class="mb-3">
