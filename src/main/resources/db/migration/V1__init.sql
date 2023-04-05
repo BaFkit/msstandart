@@ -52,6 +52,7 @@ create table orders
     work_cost                    numeric(8, 2),
     installation_cost            numeric(8, 2),
     order_cost                   numeric(8, 2),
+    order_locations              varchar(80),
     status                       varchar(50),
     preview_image_id             bigint,
     created_at                   timestamp default current_timestamp,
@@ -63,6 +64,7 @@ create table users
     id         bigserial primary key,
     username   varchar(36) not null,
     password   varchar(80) not null,
+    location   varchar(80) not null,
     email      varchar(50) unique,
     created_at timestamp default current_timestamp,
     updated_at timestamp default current_timestamp
@@ -99,28 +101,28 @@ CREATE TABLE users_roles
 
 insert into roles (name)
 values ('ROLE_USER'),
-       ('ROLE_ADMIN');
+       ('ROLE_MANAGER1'),
+       ('ROLE_MANAGER2'),
+       ('ROLE_MAKE'),
+       ('ROLE_ADMIN'),
+       ('ROLE_SYSADMIN');
 
-insert into users (username, password, email)
-values ('admin', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'admin_test@gmail.com'),
-       ('user', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'user_test@gmail.com');
+insert into users (username, password, location, email)
+values ('admin', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'admin', 'admin@local.org'),
+       ('director', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'Кинешма', 'director@local.org'),
+       ('manager1', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'Кинешма', 'manager1@local.org'),
+       ('manager2', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'Заволжск', 'manager2@local.org'),
+       ('manufacture', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'Производство', 'manufacture@local.org');
 
 insert into users_roles (user_id, role_id)
 values (1, 1),
-       (1, 2),
-       (2, 1);
-
-insert into orders(full_name, phone, address, email, id_stone, stone_material, stone_size, stone_kit, stone_figure,
-                   name_on_monument, stone_cost, work_cost, installation_cost, order_cost, status)
-values ('Грибов Виктор Сергеевич', '+79454587156', 'Московская обл. г. Пушкино ул. Гоголя д. 64 кв. 7',
-        'gribov34@mail.ru', '0', 'Гранит', '100x50x7', '60x25x12 100x5x8 50x5x8', 'Волна', 'Смирнов В.С.',
-        25000.00, 8456.00, 7000, 33456.00, 'Новый'),
-       ('Грибов Виктор Сергеевич', '+79454587156', 'Московская обл. г. Пушкино ул. Гоголя д. 64 кв. 7',
-        'gribov34@mail.ru', '0', 'Гранит', '100x50x7', '60x25x12 100x5x8 50x5x8', 'Волна', 'Галкин Д.Е.',
-        25000.00, 8456.00, 7000, 33456.00, 'Новый'),
-       ('Грибов Виктор Сергеевич', '+79454587156', 'Московская обл. г. Пушкино ул. Гоголя д. 64 кв. 7',
-        'gribov34@mail.ru', '0', 'Гранит', '100x50x7', '60x25x12 100x5x8 50x5x8', 'Волна', 'Капитанов С.С.',
-        25000.00, 8456.00, 7000, 33456.00, 'Новый'),
-       ('Грибов Виктор Сергеевич', '+79454587156', 'Московская обл. г. Пушкино ул. Гоголя д. 64 кв. 7',
-        'gribov34@mail.ru', '0', 'Гранит', '100x50x7', '60x25x12 100x5x8 50x5x8', 'Волна', 'Смирнов В.П.',
-        25000.00, 8456.00, 7000, 33456.00, 'Готов');
+       (1, 5),
+       (1, 6),
+       (2, 1),
+       (2, 5),
+       (3, 1),
+       (3, 2),
+       (4, 1),
+       (4, 3),
+       (5, 1),
+       (5, 4);

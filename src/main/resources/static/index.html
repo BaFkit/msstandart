@@ -22,7 +22,7 @@
 <div class="container-fluid ng-cloak" ng-controller="indexController">
     <div class="row flex-nowrap">
         <div class="bg-dark col-auto col-md-4 col-lg-3 min-vh-100 d-flex flex-column justify-content-between">
-            <div clas="bg-dark p-2">
+            <div class="bg-dark p-2">
                 <a class="d-flex text-decoration-none mt-1 align-item-center text-white">
                     <span class="fs-4 d-none d-sm-inline" id="title">MsStandart</span>
                 </a>
@@ -94,7 +94,7 @@
                 </ul>
             </div>
 
-            <div class="dropdown open p-3 ng-cloak" ng-show="isUserLoggedIn()">
+            <div class="dropdown open p-3 ng-cloak ng-cloak" ng-show="isUserLoggedIn()">
                 <div id="button-order-new" class="d-grid gap-2">
                     <a class="btn btn-success" href="#!/order-create" type="button">Оформить новый заказ</a>
                 </div>
@@ -117,6 +117,7 @@
             <script src="info/info.js"></script>
             <script src="order-create/order-create.js"></script>
             <script src="order-view/order-view.js"></script>
+            <script src="order-view/order-view-print.js"></script>
             <script src=""></script>
         </div>
     </div>

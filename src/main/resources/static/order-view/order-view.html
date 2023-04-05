@@ -1,8 +1,15 @@
 <div class="container">
     <div class="row">
-        <h4>Заказ №: {{order.id}} Статус: {{order.status}}</h4>
+        <div class="col-9">
+            <h4>Заказ №: <span ng-bind="order.id"></span> Статус: <span ng-bind="order.status"></span></h4>
+        </div>
+        <div class="col-3">
+            <p>Место заказа: <span ng-bind="order.orderLocations"></span></p>
+        </div>
+    </div>
+    <div class="row">
         <div class="col">
-            <h4>...</h4>
+            <h4><a href="#!/order-view-print">Распечатать...</a></h4>
         </div>
         <div class="col shadow p-3 mb-2 bg-light text-dark border border-1">
             <p>Заказчик: {{order.fullName}}</p>
@@ -16,34 +23,113 @@
         <h3>Детали заказа:</h3>
         <dl class="row shadow p-3 mb-2 bg-light text-dark border border-1">
             <dt class="col-sm-4">Артикул памятника:</dt>
-            <dd class="col-sm-8 text-end">{{order.idStone}}</dd>
+            <dd class="col-sm-7 text-end">{{order.vendorCode}}</dd>
+            <dd class="col-sm-1 text-end">{{order.monumentCost}}</dd>
 
             <dt class="col-sm-4">Материал памятника:</dt>
-            <dd class="col-sm-8 text-end">{{order.stoneMaterial}}</dd>
+            <dd class="col-sm-7 text-end">{{order.stoneMaterial}}</dd>
+            <dd class="col-sm-1 text-end"></dd>
+
+            <dt class="col-sm-4">Полировка памятника:</dt>
+            <dd class="col-sm-7 text-end">{{order.stonePolishing}}</dd>
+            <dd class="col-sm-1 text-end"></dd>
 
             <dt class="col-sm-4">Размер стелы:</dt>
-            <dd class="col-sm-8 text-end">{{order.stoneSize}}</dd>
+            <dd class="col-sm-7 text-end">{{order.stoneSize}}</dd>
+            <dd class="col-sm-1 text-end"></dd>
 
             <dt class="col-sm-4">Фигура:</dt>
-            <dd class="col-sm-8 text-end">{{order.stoneFigure}}</dd>
+            <dd class="col-sm-7 text-end">{{order.stoneFigure}}</dd>
+            <dd class="col-sm-1 text-end"></dd>
 
             <dt class="col-sm-4">Комплект памятника:</dt>
-            <dd class="col-sm-8 text-end">{{order.stoneKit}}</dd>
+            <dd class="col-sm-7 text-end">{{order.stoneKit}}</dd>
+            <dd class="col-sm-1 text-end"></dd>
 
             <dt class="col-sm-4">ФИО на памятнике:</dt>
-            <dd class="col-sm-8 text-end">{{order.nameOnMonument}}</dd>
+            <dd class="col-sm-7 text-end">{{order.nameOnMonument}}</dd>
+            <dd class="col-sm-1 text-end"></dd>
+
+            <dt class="col-sm-4">Даты на памятнике:</dt>
+            <dd class="col-sm-7 text-end">{{order.dateOnMonument}}</dd>
+            <dd class="col-sm-1 text-end">{{order.dateOnMonumentCost}}</dd>
+
+            <dt class="col-sm-4">Колличество отверстий под штыри:</dt>
+            <dd class="col-sm-7 text-end">{{order.holesInStand}}</dd>
+            <dd class="col-sm-1 text-end">{{order.holesInStandCost}}</dd>
+
+            <dt class="col-sm-4">Вид фото на памятник:</dt>
+            <dd class="col-sm-7 text-end">{{order.portrait}}</dd>
+            <dd class="col-sm-1 text-end">{{order.portraitCost}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.portraitFasteningCost">Крепление фото на памятник:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.portraitFasteningCost"></dd>
+            <dd class="col-sm-1 text-end" ng-hide="!order.portraitFasteningCost">{{order.portraitFasteningCost}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.tile">Плитка на памятник:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.tile">{{order.tile}}</dd>
+            <dd class="col-sm-1 text-end" ng-hide="!order.tile">{{order.tileCost}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.tileFasteningCost">Крепление плитки на памятник:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.tileFasteningCost"></dd>
+            <dd class="col-sm-1 text-end" ng-hide="!order.tileFasteningCost">{{order.tileFasteningCost}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.crucifix">Гравировка креста:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.crucifix">{{order.crucifix}}</dd>
+            <dd class="col-sm-1 text-end" ng-hide="!order.crucifix">{{order.crucifixCost}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.flowers">Гравировка цветов:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.flowers">{{order.flowers}}</dd>
+            <dd class="col-sm-1 text-end" ng-hide="!order.flowers">{{order.flowersCost}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.pictureOne">Дополнительный рисунок:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.pictureOne">{{order.pictureOne}}</dd>
+            <dd class="col-sm-1 text-end" ng-hide="!order.pictureOne">{{order.pictureOneCost}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.pictureTwo">Дополнительный рисунок:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.pictureTwo">{{order.pictureTwo}}</dd>
+            <dd class="col-sm-1 text-end" ng-hide="!order.pictureTwo">{{order.pictureTwoCost}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.pictureThree">Дополнительный рисунок:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.pictureThree">{{order.pictureThree}}</dd>
+            <dd class="col-sm-1 text-end" ng-hide="!order.pictureThree">{{order.pictureThreeCost}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.frame">Гравировка рамки:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.frame">{{order.frame}}</dd>
+            <dd class="col-sm-1 text-end" ng-hide="!order.frame">{{order.frameCost}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.epitaph">Эпитафия:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.epitaph">{{order.epitaph}}</dd>
+            <dd class="col-sm-1 text-end" ng-hide="!order.epitaph">{{order.epitaphCost}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.otherWorksOnMonument">Дополнительная работа на памятнике:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.otherWorksOnMonument">{{order.otherWorksOnMonument}}</dd>
+            <dd class="col-sm-1 text-end" ng-hide="!order.otherWorksOnMonument">{{order.otherWorksOnMonumentCost}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.installationLocation">Установка:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.installationLocation">{{order.installationLocation}}</dd>
+            <dd class="col-sm-1 text-end" ng-hide="!order.installationLocation">{{order.monumentInstallationCost}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.otherInstallation">Дополнительная работа по установки и монтажу:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.otherInstallation">{{order.otherInstallation}}</dd>
+            <dd class="col-sm-1 text-end" ng-hide="!order.otherInstallation">{{order.otherInstallationCost}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.otherInfo">Дополнительная информация:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.otherInfo">{{order.otherInfo}}</dd>
+            <dd class="col-sm-1 text-end" ng-hide="!order.otherInfo"></dd>
+
+
+            <hr class="order-create-hr">
+
 
             <dt class="col-sm-4">Стоимость комплекта памятника:</dt>
-            <dd class="col-sm-8 text-end">{{order.stoneCost}} р</dd>
+            <dd class="col-sm-8 text-end">{{order.stoneCost}}</dd>
 
             <dt class="col-sm-4">Стоимость работы на памятнике:</dt>
-            <dd class="col-sm-8 text-end">{{order.workCost}} р</dd>
+            <dd class="col-sm-8 text-end">{{order.workCost}}</dd>
 
             <dt class="col-sm-4">Стоимость установки памятника:</dt>
-            <dd class="col-sm-8 text-end">{{order.installationCost}} р</dd>
-
-            <dt class="col-sm-4">Перечень работ:</dt>
-            <dd class="col-sm-8 text-end">{{order.workPackage}}</dd>
+            <dd class="col-sm-8 text-end">{{order.installationCost}}</dd>
         </dl>
     </div>
     <div class="row">

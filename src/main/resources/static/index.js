@@ -24,7 +24,11 @@
             })
             .when('/order-view', {
                 templateUrl: 'order-view/order-view.html',
-                controller: 'ordersViewController'
+                controller: 'orderViewController'
+            })
+            .when('/order-view-print', {
+                templateUrl: 'order-view/order-view-print.html',
+                controller: 'orderViewPrintController'
             })
             .otherwise({
                 redirectTo: '/'
@@ -52,8 +56,9 @@ angular.module('msstandart').controller('indexController', function ($scope, $ro
             let currentTime = parseInt(new Date().getTime() / 1000);
             if (currentTime > payload.exp) {
                 alert("Token is expired!!!");
-                delete $localStorage.webUserToken;
+                delete $localStorage.webUser;
                 $http.defaults.headers.common.Authorization = '';
+                $location.path('/');
             }
         } catch (e) {
         }
@@ -74,7 +79,7 @@ angular.module('msstandart').controller('indexController', function ($scope, $ro
                     let payload = JSON.parse(atob(jwt.split('.')[1]));
                     $localStorage.username = payload.sub;
                     $localStorage.userRoles = payload.roles;
-                    console.log("role = " + $localStorage.userRoles);
+                    // console.log("role = " + $localStorage.userRoles);
 
                     $scope.user.username = null;
                     $scope.user.password = null;
@@ -89,12 +94,6 @@ angular.module('msstandart').controller('indexController', function ($scope, $ro
 
     $scope.tryToLogout = function () {
         $scope.clearUser();
-        if ($scope.user.username) {
-            $scope.user.username = null;
-        }
-        if ($scope.user.password) {
-            $scope.user.password = null;
-        }
         $location.path('/');
     };
 
