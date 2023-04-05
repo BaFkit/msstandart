@@ -1,0 +1,188 @@
+<div>
+    <link media="print" rel="stylesheet" href="/order-view/print.css">
+
+    <div class="row">
+        <div class="col-9">
+            <h4>Заказ №: <span ng-bind="order.id"></span></h4>
+        </div>
+        <div class="col-3">
+            <p>Место заказа: <span ng-bind="order.orderLocations"></span></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h4></h4>
+        </div>
+        <div class="col">
+            <p>Заказчик: {{order.fullName}}<br>
+                Телефон: {{order.phone}}<br>
+                E-mail: {{order.email}}<br>
+                Адрес: {{order.address}}<br>
+                Дата заказа: {{order.createdAt | date: 'dd.MM.yyyy'}}</p>
+        </div>
+    </div>
+    <div>
+        <h3>Детали заказа:</h3>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Наименование</th>
+                <th scope="col">Значение</th>
+                <th scope="col">Стоимость</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">Артикул памятника:</th>
+                <td>{{order.vendorCode}}</td>
+                <td>{{order.monumentCost}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Материал памятника:</th>
+                <td>{{order.stoneMaterial}}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">Полировка памятника:</th>
+                <td>{{order.stonePolishing}}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">Размер стелы:</th>
+                <td>{{order.stoneSize}}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">Фигура:</th>
+                <td>{{order.stoneFigure}}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">Комплект памятника:</th>
+                <td>{{order.stoneKit}}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">ФИО на памятнике:</th>
+                <td>{{order.nameOnMonument}}</td>
+                <td>{{order.nameOnMonumentCost}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Даты на памятнике:</th>
+                <td>{{order.dateOnMonument}}</td>
+                <td>{{order.dateOnMonumentCost}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Колличество отверстий под штыри:</th>
+                <td>{{order.holesInStand}}</td>
+                <td>{{order.holesInStandCost}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Вид фото на памятник:</th>
+                <td>{{order.portrait}}</td>
+                <td>{{order.portraitCost}}</td>
+            </tr>
+            <tr ng-hide="!order.portraitFasteningCost">
+                <th scope="row">Крепление фото на памятник:</th>
+                <td></td>
+                <td>{{order.portraitFasteningCost}}</td>
+            </tr>
+            <tr ng-hide="!order.tileFasteningCost">
+                <th scope="row">Крепление плитки на памятник:</th>
+                <td></td>
+                <td>{order.tileFasteningCost}}</td>
+            </tr>
+            <tr ng-hide="!order.crucifix">
+                <th scope="row">Гравировка креста:</th>
+                <td>{{order.crucifix}}</td>
+                <td>{{order.crucifixCost}}</td>
+            </tr>
+            <tr ng-hide="!order.flowers">
+                <th scope="row">Гравировка цветов:</th>
+                <td>{{order.flowers}}</td>
+                <td>{{order.flowersCost}}</td>
+            </tr>
+            <tr ng-hide="!order.pictureOne">
+                <th scope="row">Дополнительный рисунок:</th>
+                <td>{{order.pictureOne}}</td>
+                <td>{{order.pictureOneCost}}</td>
+            </tr>
+            <tr ng-hide="!order.pictureTwo">
+                <th scope="row">Дополнительный рисунок:</th>
+                <td>{{order.pictureTwo}}</td>
+                <td>{{order.pictureTwoCost}}</td>
+            </tr>
+            <tr ng-hide="!order.pictureThree">
+                <th scope="row">Дополнительный рисунок:</th>
+                <td>{{order.pictureThree}}</td>
+                <td>{{order.pictureThreeCost}}</td>
+            </tr>
+            <tr ng-hide="!order.frame">
+                <th scope="row">Гравировка рамки:</th>
+                <td>{{order.frame}}</td>
+                <td>{{order.frameCost}}</td>
+            </tr>
+            <tr ng-hide="!order.epitaph">
+                <th scope="row">Эпитафия:</th>
+                <td>{{order.epitaph}}</td>
+                <td>{{order.epitaphCost}}</td>
+            </tr>
+            <tr ng-hide="!order.otherWorksOnMonument">
+                <th scope="row">Дополнительная работа на памятнике:</th>
+                <td>{{order.otherWorksOnMonument}}</td>
+                <td>{{order.otherWorksOnMonumentCost}}</td>
+            </tr>
+            <tr ng-hide="!order.installationLocation">
+                <th scope="row">Установка:</th>
+                <td>{{order.installationLocation}}</td>
+                <td>{{order.monumentInstallationCost}}</td>
+            </tr>
+            <tr ng-hide="!order.otherInstallation">
+                <th scope="row">Дополнительная работа по установки и монтажу:</th>
+                <td>{{order.otherInstallation}}</td>
+                <td>{{order.otherInstallationCost}}</td>
+            </tr>
+            <tr ng-hide="!order.otherInfo">
+                <th scope="row">Дополнительная информация:</th>
+                <td>{{order.otherInfo}}</td>
+                <td></td>
+            </tr>
+
+            </tbody>
+
+            <tfoot>
+            <th></th>
+            <tr>
+                <th scope="row">Стоимость комплекта памятника:</th>
+                <td></td>
+                <td>{{order.stoneCost}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Стоимость работы на памятнике:</th>
+                <td></td>
+                <td>{{order.workCost}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Стоимость установки памятника:</th>
+                <td></td>
+                <td>{{order.installationCost}}</td>
+            </tr>
+            <tr>
+                <th scope="row"><h4>Итого:</h4></th>
+                <td></td>
+                <td><h4>{{order.orderCost}}</h4></td>
+            </tr>
+            </tfoot>
+
+        </table>
+    </div>
+</div>
+<div id="signing">
+    <p id="notice">Я ознакомлен и согласен с перечнем товаров и услуг, а так же их стоимостью. </p>
+    <div class="row">
+        <div id="rectangle1"><p id="rectangleText1">ФИО заказчика полностью</p></div>
+        <div id="rectangle2"><p id="rectangleText2">Подпись заказчика</p></div>
+    </div>
+</div>
+

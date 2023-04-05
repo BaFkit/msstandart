@@ -1,7 +1,8 @@
-angular.module('msstandart').controller('orderCreateController', function ($scope, $http) {
+angular.module('msstandart').controller('orderCreateController', function ($scope, $http, $localStorage) {
     const contextPath = 'http://localhost:8080/api/v1/orders';
 
     $scope.tryCreateNewOrder = function () {
+        $scope.newOrder.username = $localStorage.username;
         $http.post(contextPath, $scope.newOrder)
             .then(function successCallback(response) {
                 alert('Заказ создан ');

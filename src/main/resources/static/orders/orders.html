@@ -2,10 +2,11 @@
     <div class="col-sm-6 col-md-10">
         <table class="table table-striped">
             <tr>
-                <td>Номер заказа</td>
+                <td>№</td>
                 <td>ФИО на памятнике</td>
                 <td>Телефон</td>
                 <td>Дата заказа</td>
+                <td>Место заказа</td>
                 <td>Статус</td>
                 <td>Функции</td>
             </tr>
@@ -15,6 +16,7 @@
                 <td>{{order.nameOnMonument}}</td>
                 <td>{{order.phone}}</td>
                 <td>{{order.createdAt | date: 'dd.MM.yyyy'}}</td>
+                <td>{{order.orderLocations}}</td>
                 <td>{{order.status}}</td>
                 <td>
                     <button class="btn btn-secondary" ng-click="goToOrder(order.id)">Подробней</button>
