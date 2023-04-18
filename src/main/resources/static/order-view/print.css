@@ -7,7 +7,11 @@
 
     }
 
-    ul, ol, table {
+    /*ul, ol, table {*/
+    /*    page-break-inside: avoid;*/
+    /*}*/
+
+    tr {
         page-break-inside: avoid;
     }
 
@@ -37,7 +41,7 @@
 
     #signing {
         display: block;
-        position: absolute;
+        /*position: absolute;*/
         bottom: 0;
     }
 

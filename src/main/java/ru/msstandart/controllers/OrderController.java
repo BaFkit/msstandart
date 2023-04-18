@@ -3,10 +3,12 @@ package ru.msstandart.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import ru.msstandart.dto.OrderDtoIn;
 import ru.msstandart.dto.OrderDtoForList;
 import ru.msstandart.dto.OrderDtoOut;
+import ru.msstandart.exceptions.ResourceNotFoundException;
 import ru.msstandart.services.OrderService;
 
 @RestController
@@ -24,8 +26,8 @@ public class OrderController {
     }
 
     @PostMapping
-    public void createOrder(@RequestHeader String username, @RequestBody OrderDtoIn orderDtoIn){
-        orderService.saveOrder(username, orderDtoIn);
+    public void createOrder(Authentication authentication, @RequestBody OrderDtoIn orderDtoIn){
+        orderService.saveOrder(authentication.getName(), orderDtoIn);
     }
 
     @GetMapping("/{id}")

@@ -16,7 +16,7 @@
         <label class="form-label">Дополнительный номер телефона:</label>
         <input type="number" class="form-control" placeholder="Доп. Телефон" ng-model="newOrder.phoneSecond"
                required>
-        <div id="numberSecondHelpPhone" class="form-text">Нужно указать дополнительный номер телефона(не обязательно)
+        <div id="numberSecondHelpPhone" class="form-text">Нужно указать дополнительный номер телефона(необязательно)
         </div>
     </div>
 
@@ -30,7 +30,7 @@
         <label for="exampleFormControlInput1" class="form-label">Почта:</label>
         <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@mail.ru"
                ng-model="newOrder.email">
-        <div id="textHelpEmail" class="form-text">Электронная почта(не обязательно)</div>
+        <div id="textHelpEmail" class="form-text">Электронная почта(необязательно)</div>
     </div>
 
     <hr class="order-create-hr">
@@ -60,8 +60,8 @@
     <div>
         <label class="form-label">Полировка памятника:</label>
         <select class="form-select" ng-model="newOrder.stonePolishing" required>
-            <option value="Лицева">Лицева полировка</option>
-            <option value="Лицева+Торцы">Лицева + Торцы</option>
+            <option value="Лицева">Лицевая полировка</option>
+            <option value="Лицева+Торцы">Лицевая + Торцы</option>
             <option value="Полная">Полная полировка</option>
         </select>
     </div>
@@ -153,11 +153,11 @@
         <label class="form-label">Даты на памятник:</label>
         <div class="row row-cols-auto">
             <div class="col">
-                <input type="number" class="form-control" ng-model="newOrder.dateOnMonument1" required>
+                <input type="date" class="form-control" ng-model="newOrder.dateOnMonument1" placeholder="yyyy-MM-dd" min="1900-01-01" max="2023-12-31" required>
                 <div id="textHelpDateOnMonument1" class="form-text">Нужно указать дату</div>
             </div>
             <div class="col">
-                <input type="number" class="form-control" ng-model="newOrder.dateOnMonument2" required>
+                <input type="date" class="form-control" ng-model="newOrder.dateOnMonument2" placeholder="yyyy-MM-dd" min="1900-01-01" max="2023-12-31" required>
                 <div id="textHelpDateOnMonument2" class="form-text">Нужно указать дату</div>
             </div>
             <div class="col">
@@ -173,19 +173,19 @@
     <hr class="order-create-hr">
 
     <div class="mb-3">
-        <label class="form-label">Колличество отверствий под штыри:</label>
+        <label class="form-label">Количество отверстий под штыри:</label>
         <div class="row row-cols-auto">
             <div class="col">
-                <div class="form-check form-check-inline" ng-model="newOrder.holesInStand">
-                    <input class="form-check-input" type="radio" id="inlineCheckbox0" value="0">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" ng-model="newOrder.holesInStand" type="radio" id="inlineCheckbox0" ng-value="0">
                     <label class="form-check-label" for="inlineCheckbox1">Без отверстий</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="inlineCheckbox1" value="1">
+                    <input class="form-check-input" ng-model="newOrder.holesInStand" type="radio" id="inlineCheckbox1" ng-value="1">
                     <label class="form-check-label" for="inlineCheckbox1">1 отв.</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="inlineCheckbox2" value="2" ng-checked="true">
+                    <input class="form-check-input" ng-model="newOrder.holesInStand" type="radio" id="inlineCheckbox2" ng-value="2">
                     <label class="form-check-label" for="inlineCheckbox2">2 отв.</label>
                 </div>
             </div>
@@ -288,7 +288,7 @@
                 <div class="mb-3">
                     <div class="row">
                         <div class="col-8">
-                            <label for="flowersInput" class="form-label">Указать вид и колличество цветов на
+                            <label for="flowersInput" class="form-label">Указать вид и количество цветов на
                                 памятник:</label>
                             <input type="text" id="flowersInput" class="form-control" ng-model="newOrder.flowers">
                         </div>
@@ -474,7 +474,7 @@
                         <div class="col-8">
                             <label class="form-label">Дополнительная работа по установки и монтажу:</label>
                             <input type="text" class="form-control" ng-model="newOrder.otherInstallation">
-                            <div id="textHelpOtherInstallation" class="form-text">Нужно указать дополнительные ввиды работ или установок, в том числе других изделий</div>
+                            <div id="textHelpOtherInstallation" class="form-text">Нужно указать дополнительные виды работ или установок, в том числе других изделий</div>
                         </div>
                         <div class="col-4">
                             <label for="otherInstallationCostInput" class="form-label">Стоимость дополнительных работ:</label>
