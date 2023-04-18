@@ -11,8 +11,6 @@
     <groupId>ru.msstandart</groupId>
     <artifactId>msstandart</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>msstandart</name>
-    <description>msstandart</description>
     <properties>
         <java.version>11</java.version>
     </properties>

@@ -3,10 +3,10 @@ package ru.msstandart.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.msstandart.enumeration.OrderLocations;
 import ru.msstandart.enumeration.StatusOrder;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -33,8 +33,8 @@ public class OrderDtoIn {
     private String notStandardFigure;
     private String nameOnMonument;
     private BigDecimal nameOnMonumentCost;
-    private String dateOnMonument1;
-    private String dateOnMonument2;
+    private LocalDate dateOnMonument1;
+    private LocalDate dateOnMonument2;
     private BigDecimal dateOnMonumentCost;
     private Integer holesInStand;
     private BigDecimal holesInStandCost;
