@@ -55,7 +55,7 @@ angular.module('msstandart').controller('indexController', function ($scope, $ro
             let payload = JSON.parse(atob(jwt.split('.')[1]));
             let currentTime = parseInt(new Date().getTime() / 1000);
             if (currentTime > payload.exp) {
-                alert("Token is expired!!!");
+                // alert("Token is expired!!!");
                 delete $localStorage.webUser;
                 $http.defaults.headers.common.Authorization = '';
                 $location.path('/');
@@ -88,7 +88,7 @@ angular.module('msstandart').controller('indexController', function ($scope, $ro
                     updateDropDown()
                 }
             }, function errorCallback(response) {
-
+                alert(response.data.message);
             });
     };
 

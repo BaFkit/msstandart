@@ -2,6 +2,7 @@ package ru.msstandart.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -18,11 +19,10 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping
-    public Page<OrderDtoForList> getAllOrders(@RequestParam(name = "p", defaultValue = "1") Integer page) {
+    public Page<OrderDtoForList> getAllOrders(Authentication authentication, @RequestParam(name = "p", defaultValue = "1") Integer page) {
         if (page < 1) page = 1;
-       return orderService.getAll(page);
+       return orderService.getAll(authentication.getName(), page);
     }
 
     @PostMapping
@@ -33,5 +33,11 @@ public class OrderController {
     @GetMapping("/{id}")
     public OrderDtoOut getOrderById(@PathVariable Long id) {
         return orderService.findOrderById(id);
+    }
+
+    @GetMapping("/status/change/{id}/{status}")
+    @ResponseStatus(HttpStatus.OK)
+    public void changeOrderStatus(@PathVariable Long id, @PathVariable String status) {
+        orderService.changeOrderStatus(id, status);
     }
 }

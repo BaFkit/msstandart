@@ -9,7 +9,18 @@
     </div>
     <div class="row">
         <div class="col">
-            <h4><a href="#!/order-view-print">Распечатать...</a></h4>
+            <h4 ng-show="!isUserRoles('ROLE_MAKE')"><a href="#!/order-view-print">Распечатать...</a></h4>
+            <div class="dropdown" ng-show="isUserRoles('ROLE_MAKE')">
+                <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    Сменить статус
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li ng-show="isUserRoles('ROLE_ADMIN')"><a class="dropdown-item" href="" ng-click="changeOrderStatus('Новый')">Новый</a></li>
+                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('В_Работе')">В Работе</a></li>
+                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('Готов')">Готов</a></li>
+                    <li ng-show="isUserRoles('ROLE_ADMIN')"><a class="dropdown-item" href="" ng-click="changeOrderStatus('Отдан')">Отдан</a></li>
+                </ul>
+            </div>
         </div>
         <div class="col shadow p-3 mb-2 bg-light text-dark border border-1">
             <p>Заказчик: {{order.fullName}}</p>

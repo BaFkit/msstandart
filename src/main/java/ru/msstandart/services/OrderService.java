@@ -10,6 +10,7 @@ import ru.msstandart.dto.OrderDtoIn;
 import ru.msstandart.dto.OrderDtoForList;
 import ru.msstandart.dto.OrderDtoOut;
 import ru.msstandart.entities.Order;
+import ru.msstandart.entities.User;
 import ru.msstandart.enumeration.OrderLocations;
 import ru.msstandart.enumeration.StatusOrder;
 import ru.msstandart.exceptions.ResourceNotFoundException;
@@ -23,9 +24,20 @@ public class OrderService {
 
    private final OrderRepository orderRepository;
    private final UserService userService;
+   private final RoleService roleService;
 
-   public Page<OrderDtoForList> getAll(Integer page) {
-      return orderRepository.findByOrderByCreatedAtDesc(PageRequest.of(page - 1, 10)).map(EntityDtoMapper.INSTANCE::toDtoForList);
+   @Transactional
+   public Page<OrderDtoForList> getAll(String username, Integer page) {
+      User user = userService.findByUsername(username);
+      if (user.getRoles().contains(roleService.findRoleByName("ROLE_ADMIN"))) {
+         return orderRepository.findByOrderByCreatedAtDesc(PageRequest.of(page - 1, 10)).map(EntityDtoMapper.INSTANCE::toDtoForList);
+      }
+      if (user.getRoles().contains(roleService.findRoleByName("ROLE_MAKE"))) {
+         return orderRepository.findAllWhereStatusIsNot(PageRequest.of(page - 1, 10), StatusOrder.Новый, StatusOrder.В_Работе, StatusOrder.Готов).map(EntityDtoMapper.INSTANCE::toDtoForList);
+      }
+      return orderRepository.findAllByOrderLocations(PageRequest.of(page - 1, 10), OrderLocations.valueOf(user.getLocation())).map(EntityDtoMapper.INSTANCE::toDtoForList);
+
+//      return orderRepository.findByOrderByCreatedAtDesc(PageRequest.of(page - 1, 10)).map(EntityDtoMapper.INSTANCE::toDtoForList);
    }
 
    public OrderDtoOut findOrderById(Long id) {
@@ -42,5 +54,11 @@ public class OrderService {
       order.setOrderLocations(OrderLocations.valueOf(userService.findByUsername(username).getLocation()));
       order.setStatus(StatusOrder.Подписание);
       orderRepository.save(order);
+   }
+
+   @Transactional
+   public void changeOrderStatus(Long orderId, String status) {
+      Order order = orderRepository.findById(orderId).orElseThrow(() -> new ResourceNotFoundException(String.format("Order '%d' not found", orderId)));
+      order.setStatus(StatusOrder.valueOf(status));
    }
 }
