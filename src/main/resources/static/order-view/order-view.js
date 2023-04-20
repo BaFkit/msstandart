@@ -16,17 +16,5 @@ angular.module('msstandart').controller('orderViewController', function ($localS
             });
     }
 
-    $rootScope.isUserRoles = function (role) {
-        let isRole = false;
-        if($localStorage.webUser) {
-            $localStorage.userRoles.forEach(function (entry) {
-                if (role === entry) {
-                    isRole = true;
-                }
-            });
-        }
-        return isRole;
-    };
-
     $scope.loadOrder();
 });

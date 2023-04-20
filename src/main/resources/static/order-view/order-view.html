@@ -1,4 +1,5 @@
 <div class="container">
+
     <div class="row">
         <div class="col-9">
             <h4>Заказ №: <span ng-bind="order.id"></span> Статус: <span ng-bind="order.status"></span></h4>
@@ -9,18 +10,57 @@
     </div>
     <div class="row">
         <div class="col">
-            <h4 ng-show="!isUserRoles('ROLE_MAKE')"><a href="#!/order-view-print">Распечатать...</a></h4>
-            <div class="dropdown" ng-show="isUserRoles('ROLE_MAKE')">
-                <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                    Сменить статус
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <li ng-show="isUserRoles('ROLE_ADMIN')"><a class="dropdown-item" href="" ng-click="changeOrderStatus('Новый')">Новый</a></li>
-                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('В_Работе')">В Работе</a></li>
-                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('Готов')">Готов</a></li>
-                    <li ng-show="isUserRoles('ROLE_ADMIN')"><a class="dropdown-item" href="" ng-click="changeOrderStatus('Отдан')">Отдан</a></li>
-                </ul>
-            </div>
+
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#!/order-view-print" ng-show="!isUserRoles('ROLE_MAKE')">Распечатать</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                        <ul class="navbar-nav">
+
+                            <li class="nav-item dropdown" ng-show="isUserRoles('ROLE_ADMIN')">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLinkAdmin" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Сменить статус
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                    <li ng-show="isUserRoles('ROLE_ADMIN')"><a class="dropdown-item" href="" ng-click="changeOrderStatus('Новый')">Новый</a></li>
+                                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('В_Работе')">В Работе</a></li>
+                                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('Готов')">Готов</a></li>
+                                    <li ng-show="isUserRoles('ROLE_ADMIN')"><a class="dropdown-item" href="" ng-click="changeOrderStatus('Отдан')">Отдан</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown" ng-show="isUserRoles('ROLE_MAKE')">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLinkMake" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Сменить статус
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('В_Работе')">В Работе</a></li>
+                                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('Готов')">Готов</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+
+<!--            <h4 ng-show="!isUserRoles('ROLE_MAKE')"><a href="#!/order-view-print">Распечатать...</a></h4>-->
+<!--            <div class="dropdown" ng-show="isUserRoles('ROLE_MAKE')">-->
+<!--                <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                    Сменить статус-->
+<!--                </a>-->
+<!--                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">-->
+<!--                    <li ng-show="isUserRoles('ROLE_ADMIN')"><a class="dropdown-item" href="" ng-click="changeOrderStatus('Новый')">Новый</a></li>-->
+<!--                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('В_Работе')">В Работе</a></li>-->
+<!--                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('Готов')">Готов</a></li>-->
+<!--                    <li ng-show="isUserRoles('ROLE_ADMIN')"><a class="dropdown-item" href="" ng-click="changeOrderStatus('Отдан')">Отдан</a></li>-->
+<!--                </ul>-->
+<!--            </div>-->
         </div>
         <div class="col shadow p-3 mb-2 bg-light text-dark border border-1">
             <p>Заказчик: {{order.fullName}}</p>
@@ -30,7 +70,7 @@
             <p>Дата заказа: {{order.createdAt | date: 'dd.MM.yyyy'}}</p>
         </div>
     </div>
-    <div>
+    <div ng-show="!isUserRoles('ROLE_MAKE')">
         <h3>Детали заказа:</h3>
         <dl class="row shadow p-3 mb-2 bg-light text-dark border border-1">
             <dt class="col-sm-4">Артикул памятника:</dt>
@@ -143,7 +183,7 @@
             <dd class="col-sm-8 text-end">{{order.installationCost}}</dd>
         </dl>
     </div>
-    <div class="row">
+    <div class="row" ng-show="!isUserRoles('ROLE_MAKE')">
         <div class="col-4">
             <div class="shadow p-3 mb-2 bg-light text-dark border border-1">
                 <h4>Итоговая стоимость:</h4>
@@ -155,4 +195,92 @@
             </div>
         </div>
     </div>
+
+<!--    ************************************for manufacture*****************************************-->
+    <div ng-show="isUserRoles('ROLE_MAKE')">
+        <h3>Детали заказа:</h3>
+        <dl class="row shadow p-3 mb-2 bg-light text-dark border border-1">
+            <dt class="col-sm-4">Артикул памятника:</dt>
+            <dd class="col-sm-7 text-end">{{order.vendorCode}}</dd>
+
+            <dt class="col-sm-4">Материал памятника:</dt>
+            <dd class="col-sm-7 text-end">{{order.stoneMaterial}}</dd>
+            <dd class="col-sm-1 text-end"></dd>
+
+            <dt class="col-sm-4">Полировка памятника:</dt>
+            <dd class="col-sm-7 text-end">{{order.stonePolishing}}</dd>
+            <dd class="col-sm-1 text-end"></dd>
+
+            <dt class="col-sm-4">Размер стелы:</dt>
+            <dd class="col-sm-7 text-end">{{order.stoneSize}}</dd>
+            <dd class="col-sm-1 text-end"></dd>
+
+            <dt class="col-sm-4">Фигура:</dt>
+            <dd class="col-sm-7 text-end">{{order.stoneFigure}}</dd>
+            <dd class="col-sm-1 text-end"></dd>
+
+            <dt class="col-sm-4">Комплект памятника:</dt>
+            <dd class="col-sm-7 text-end">{{order.stoneKit}}</dd>
+            <dd class="col-sm-1 text-end"></dd>
+
+            <dt class="col-sm-4">ФИО на памятнике:</dt>
+            <dd class="col-sm-7 text-end">{{order.nameOnMonument}}</dd>
+            <dd class="col-sm-1 text-end"></dd>
+
+            <dt class="col-sm-4">Даты на памятнике:</dt>
+            <dd class="col-sm-7 text-end">{{order.dateOnMonument}}</dd>
+
+            <dt class="col-sm-4">Колличество отверстий под штыри:</dt>
+            <dd class="col-sm-7 text-end">{{order.holesInStand}}</dd>
+
+            <dt class="col-sm-4">Вид фото на памятник:</dt>
+            <dd class="col-sm-7 text-end">{{order.portrait}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.portraitFasteningCost">Крепление фото на памятник:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.portraitFasteningCost"></dd>
+
+            <dt class="col-sm-4" ng-hide="!order.tile">Плитка на памятник:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.tile">{{order.tile}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.tileFasteningCost">Крепление плитки на памятник:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.tileFasteningCost"></dd>
+
+            <dt class="col-sm-4" ng-hide="!order.crucifix">Гравировка креста:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.crucifix">{{order.crucifix}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.flowers">Гравировка цветов:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.flowers">{{order.flowers}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.pictureOne">Дополнительный рисунок:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.pictureOne">{{order.pictureOne}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.pictureTwo">Дополнительный рисунок:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.pictureTwo">{{order.pictureTwo}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.pictureThree">Дополнительный рисунок:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.pictureThree">{{order.pictureThree}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.frame">Гравировка рамки:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.frame">{{order.frame}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.epitaph">Эпитафия:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.epitaph">{{order.epitaph}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.otherWorksOnMonument">Дополнительная работа на памятнике:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.otherWorksOnMonument">{{order.otherWorksOnMonument}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.installationLocation">Установка:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.installationLocation">{{order.installationLocation}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.otherInstallation">Дополнительная работа по установки и монтажу:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.otherInstallation">{{order.otherInstallation}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.otherInfo">Дополнительная информация:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.otherInfo">{{order.otherInfo}}</dd>
+            <dd class="col-sm-1 text-end" ng-hide="!order.otherInfo"></dd>
+        </dl>
+    </div>
+<!--    ************************************for manufacture*****************************************-->
+
+
 </div>

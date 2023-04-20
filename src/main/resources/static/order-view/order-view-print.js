@@ -1,7 +1,5 @@
-angular.module('msstandart').controller('orderViewPrintController', function ($localStorage, $scope, $http) {
+angular.module('msstandart').controller('orderViewPrintController', function ($localStorage, $scope, $rootScope, $http) {
     const contextPath = 'http://localhost:8080/api/v1/orders/';
-
-
 
     $scope.loadOrder = function () {
         $http.get(contextPath + $localStorage.orderId)
