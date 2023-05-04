@@ -1,5 +1,20 @@
 package ru.msstandart.enumeration;
 
 public enum StatusOrder {
-    Подписание, Новый, В_Работе, Готов, Отдан
+    Signing("На подписание"),
+    New("Новый"),
+    In_work("В работе"),
+    Ready("Готов"),
+    Clarification("На уточнении"),
+    Issued("Отдан");
+
+    private final String nameStatus;
+
+    StatusOrder(String nameStatus) {
+        this.nameStatus = nameStatus;
+    }
+
+    public String getNameStatus() {
+        return nameStatus;
+    }
 }

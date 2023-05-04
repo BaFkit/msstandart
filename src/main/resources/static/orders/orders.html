@@ -14,9 +14,10 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLinkFilterLocations" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Фильтр по магазинам
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="" ng-click="">Заказы Кинешмы</a></li>
-                                <li><a class="dropdown-item" href="" ng-click="">Заказы Заволжска</a></li>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink" ng-model="location">
+                                <li><a class="dropdown-item" href="" ng-click="loadOrders(location = 'Кинешма', pageIndex)">Заказы Кинешмы</a></li>
+                                <li><a class="dropdown-item" href="" ng-click="loadOrders(location  = 'Заволжск', pageIndex)">Заказы Заволжска</a></li>
+                                <li><a class="dropdown-item" href="" ng-click="loadOrders(location  = '', pageIndex)">Все заказы</a></li>
                             </ul>
                         </li>
 
@@ -25,11 +26,13 @@
                                 Фильтр по статусы
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="" ng-click="">Заказы в статусе подписания</a></li>
-                                <li><a class="dropdown-item" href="" ng-click="">Новые заказы</a></li>
-                                <li><a class="dropdown-item" href="" ng-click="">Заказы в работе</a></li>
-                                <li><a class="dropdown-item" href="" ng-click="">Готовые заказы</a></li>
-                                <li><a class="dropdown-item" href="" ng-click="">Выданные заказы</a></li>
+                                <li><a class="dropdown-item" href="" ng-click="loadOrders(location, status = 'Signing', pageIndex)">Заказы в статусе подписания</a></li>
+                                <li><a class="dropdown-item" href="" ng-click="loadOrders(location, status = 'New', pageIndex)">Новые заказы</a></li>
+                                <li><a class="dropdown-item" href="" ng-click="loadOrders(location, status = 'In_work', pageIndex)">Заказы в работе</a></li>
+                                <li><a class="dropdown-item" href="" ng-click="loadOrders(location, status = 'Ready', pageIndex)">Готовые заказы</a></li>
+                                <li><a class="dropdown-item" href="" ng-click="loadOrders(location, status = 'Clarification', pageIndex)">Заказы на уточнении</a></li>
+                                <li><a class="dropdown-item" href="" ng-click="loadOrders(location, status = 'Issued', pageIndex)">Выданные заказы</a></li>
+                                <li><a class="dropdown-item" href="" ng-click="loadOrders(location, status = '', pageIndex)">Показать все</a></li>
                             </ul>
                         </li>
 
@@ -69,7 +72,7 @@
         <nav aria-label="Page navigation">
             <ul class="pagination">
                 <li class="page-item" ng-repeat="pageIndex in paginationArray">
-                    <button class="page-link" ng-click="loadOrders(pageIndex)">{{pageIndex}}</button>
+                    <button class="page-link" ng-model="location" ng-click="loadOrders(location, pageIndex)">{{pageIndex}}</button>
                 </li>
             </ul>
         </nav>

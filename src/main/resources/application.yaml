@@ -8,15 +8,12 @@ spring:
       max-request-size: 10MB
 
   datasource:
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/msstandart_db
     username: postgres
     password: postgres
-    url: jdbc:postgresql://localhost:5432/msstandart_db
-
+    driver-class-name: org.postgresql.Driver
 
   jpa:
+    hibernate:
+      ddl-auto: none
     show-sql: true
-    properties:
-      hibernate:
-        ddl-auto: none
-        dialect: org.hibernate.dialect.PostgreSQLDialect

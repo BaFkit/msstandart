@@ -75,7 +75,7 @@
                         </a>
                     </li>
                     <li class="nav-item py-2 py-sm-0" ng-show="isUserRoles('ROLE_ADMIN')">
-                        <a href="#" class="nav-link text-white">
+                        <a href="#!/personnel" class="nav-link text-white">
                             <i class="fs-5 fa fa-users"></i><span
                                 class="fs-4 ms-3 d-none d-sm-inline">Персонал</span>
                         </a>
@@ -94,7 +94,7 @@
 
             <div class="dropdown open p-3 ng-cloak ng-cloak" ng-show="isUserLoggedIn()">
                 <div id="button-order-new" class="d-grid gap-2">
-                    <a class="btn btn-success" href="#!/order-create" type="button" ng-show="!isUserRoles('ROLE_MAKE')">Оформить новый заказ</a>
+                    <a class="btn btn-success" href="#!/order-create" type="button" ng-show="!isUserRoles('ROLE_MAKER')">Оформить новый заказ</a>
                 </div>
                 <button class="btn border-none dropdown-toggle text-white" type="button" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -116,6 +116,7 @@
             <script src="order-create/order-create.js"></script>
             <script src="order-view/order-view.js"></script>
             <script src="order-view/order-view-print.js"></script>
+            <script src="personnel/personnel.js"></script>
             <script src=""></script>
         </div>
     </div>

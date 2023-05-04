@@ -18,6 +18,6 @@ public class OrderDtoForList {
     private String phone;
     private LocalDateTime createdAt;
     private OrderLocations orderLocations;
-    private StatusOrder status;
+    private String status;
 
 }
