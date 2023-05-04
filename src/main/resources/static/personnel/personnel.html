@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="col-sm-6 col-md-10">
+        <table class="table table-striped">
+            <tr>
+                <td>Логин</td>
+                <td>Функции</td>
+            </tr>
+            <tbody>
+            <tr ng-repeat="user in users">
+                <td>{{user.username}}</td>
+                <td>
+                    <button class="btn btn-secondary" ng-click="selectUser(user.id)" data-bs-toggle="modal" data-bs-target="#exampleModal">Сменить пароль</button>
+                </td>
+            </tr>
+            </tbody>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Сменить пароль для пользователя c id: {{userId}}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group mb-3">
+                                <input id="navPasswordField" class="form-control" ng-model="password" type="password" placeholder="Введите пароль"
+                                       aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" ng-click = "changePassword()" data-bs-dismiss="modal">Сменить пароль</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </table>
+    </div>
+</div>

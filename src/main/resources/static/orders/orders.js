@@ -1,11 +1,13 @@
 angular.module('msstandart').controller('ordersController', function ($location, $localStorage, $scope, $http) {
     const contextPath = 'http://localhost:8080/api/v1/orders';
 
-    $scope.loadOrders = function (pageIndex = 1) {
+    $scope.loadOrders = function (location, status, pageIndex = 1) {
         $http({
             url: contextPath,
             method: 'GET',
             params: {
+                location: location ? location : null,
+                status: status ? status : null,
                 p: pageIndex
             }
         })

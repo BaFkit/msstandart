@@ -30,6 +30,10 @@
                 templateUrl: 'order-view/order-view-print.html',
                 controller: 'orderViewPrintController'
             })
+            .when('/personnel', {
+                templateUrl: 'personnel/personnel.html',
+                controller: 'personnelController'
+            })
             .otherwise({
                 redirectTo: '/'
             });
@@ -79,7 +83,6 @@ angular.module('msstandart').controller('indexController', function ($scope, $ro
                     let payload = JSON.parse(atob(jwt.split('.')[1]));
                     $localStorage.username = payload.sub;
                     $localStorage.userRoles = payload.roles;
-                    // console.log("role = " + $localStorage.userRoles);
 
                     $scope.user.username = null;
                     $scope.user.password = null;

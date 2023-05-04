@@ -14,10 +14,11 @@
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#!/order-view-print" ng-show="!isUserRoles('ROLE_MAKE')">Распечатать</a>
+                    <a class="navbar-brand" href="#!/order-view-print" ng-show="!isUserRoles('ROLE_MAKER')">Распечатать</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+
                     <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                         <ul class="navbar-nav">
 
@@ -26,42 +27,72 @@
                                     Сменить статус
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                    <li ng-show="isUserRoles('ROLE_ADMIN')"><a class="dropdown-item" href="" ng-click="changeOrderStatus('Новый')">Новый</a></li>
-                                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('В_Работе')">В Работе</a></li>
-                                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('Готов')">Готов</a></li>
-                                    <li ng-show="isUserRoles('ROLE_ADMIN')"><a class="dropdown-item" href="" ng-click="changeOrderStatus('Отдан')">Отдан</a></li>
+                                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('New')">Новый</a></li>
+                                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('In_work')">В Работе</a></li>
+                                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('Ready')">Готов</a></li>
+                                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('Clarification')">На уточнении</a></li>
+                                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('Issued')">Отдан</a></li>
                                 </ul>
                             </li>
 
-                            <li class="nav-item dropdown" ng-show="isUserRoles('ROLE_MAKE')">
+                            <li class="nav-item dropdown" ng-show="isUserRoles('ROLE_MAKER')">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLinkMake" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Сменить статус
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('В_Работе')">В Работе</a></li>
-                                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('Готов')">Готов</a></li>
+                                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('In_work')">В Работе</a></li>
+                                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('Clarification')">На уточнении</a></li>
+                                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('Ready')">Готов</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLinkFile" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Фото
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                    <li><a class="dropdown-item" href="">Просмотреть все фото</a></li>
+                                    <li><a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#exampleModal">Загрузить фото</a></li>
                                 </ul>
                             </li>
 
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Загрузить фото</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="input-group mb-3">
+                                                <input type="file" class="form-control" id="inputGroupFile02" file-model = "myFile" accept=".jpg,.png">
+<!--                                                <button class="input-group-text" for="inputGroupFile02" ng-click = "uploadFile()">Загрузить</button>-->
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" ng-init="isPreview = false" ng-model="isPreview">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    Использовать изображение для превью заказа
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+<!--                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>-->
+                                            <button type="button" class="btn btn-primary" ng-click = "uploadFile()">Загрузить</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </ul>
                     </div>
                 </div>
             </nav>
 
-
-<!--            <h4 ng-show="!isUserRoles('ROLE_MAKE')"><a href="#!/order-view-print">Распечатать...</a></h4>-->
-<!--            <div class="dropdown" ng-show="isUserRoles('ROLE_MAKE')">-->
-<!--                <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--                    Сменить статус-->
-<!--                </a>-->
-<!--                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">-->
-<!--                    <li ng-show="isUserRoles('ROLE_ADMIN')"><a class="dropdown-item" href="" ng-click="changeOrderStatus('Новый')">Новый</a></li>-->
-<!--                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('В_Работе')">В Работе</a></li>-->
-<!--                    <li><a class="dropdown-item" href="" ng-click="changeOrderStatus('Готов')">Готов</a></li>-->
-<!--                    <li ng-show="isUserRoles('ROLE_ADMIN')"><a class="dropdown-item" href="" ng-click="changeOrderStatus('Отдан')">Отдан</a></li>-->
-<!--                </ul>-->
+<!--            <div>-->
+<!--                <img src="{{orderPreview}}" class="img-thumbnail" alt="...">-->
 <!--            </div>-->
+
+
         </div>
+
         <div class="col shadow p-3 mb-2 bg-light text-dark border border-1">
             <p>Заказчик: {{order.fullName}}</p>
             <p>Телефон: {{order.phone}}</p>
@@ -70,7 +101,11 @@
             <p>Дата заказа: {{order.createdAt | date: 'dd.MM.yyyy'}}</p>
         </div>
     </div>
-    <div ng-show="!isUserRoles('ROLE_MAKE')">
+
+
+
+
+    <div ng-show="!isUserRoles('ROLE_MAKER')">
         <h3>Детали заказа:</h3>
         <dl class="row shadow p-3 mb-2 bg-light text-dark border border-1">
             <dt class="col-sm-4">Артикул памятника:</dt>
@@ -183,7 +218,7 @@
             <dd class="col-sm-8 text-end">{{order.installationCost}}</dd>
         </dl>
     </div>
-    <div class="row" ng-show="!isUserRoles('ROLE_MAKE')">
+    <div class="row" ng-show="!isUserRoles('ROLE_MAKER')">
         <div class="col-4">
             <div class="shadow p-3 mb-2 bg-light text-dark border border-1">
                 <h4>Итоговая стоимость:</h4>
@@ -197,7 +232,7 @@
     </div>
 
 <!--    ************************************for manufacture*****************************************-->
-    <div ng-show="isUserRoles('ROLE_MAKE')">
+    <div ng-show="isUserRoles('ROLE_MAKER')">
         <h3>Детали заказа:</h3>
         <dl class="row shadow p-3 mb-2 bg-light text-dark border border-1">
             <dt class="col-sm-4">Артикул памятника:</dt>
@@ -281,6 +316,13 @@
         </dl>
     </div>
 <!--    ************************************for manufacture*****************************************-->
+
+    <div>
+
+
+
+
+    </div>
 
 
 </div>

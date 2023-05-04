@@ -67,7 +67,7 @@ public class OrderDtoOut {
     private BigDecimal installationCost;
     private BigDecimal orderCost;
     private OrderLocations orderLocations;
-    private StatusOrder status;
+    private String status;
     private LocalDateTime createdAt;
     private Long previewImageId;
 
