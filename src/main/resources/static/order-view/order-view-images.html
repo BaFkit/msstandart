@@ -1,0 +1,13 @@
+<div>
+    <input type="button" class="btn btn-secondary sticky-sm-top" onclick="history.back();" value="<- Назад к заказу"/>
+    <div>
+        <ul>
+            <li ng-repeat="image in orderImages">
+                <img ng-src="data:image/png;base64,{{image.bytes}}" class="img-thumbnail" alt="">
+            </li>
+            <li ng-if="orderImages.length === 0">
+                <strong>Нет изображений</strong>
+            </li>
+        </ul>
+    </div>
+</div>

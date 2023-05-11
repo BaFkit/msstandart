@@ -49,8 +49,10 @@
     display: none;
 }
 
-
-
+#dropdownRightMenu {
+    position: fixed;
+    bottom: 0;
+}
 
 /*<<<<<<Order page:>>>>>>*/
 
@@ -60,4 +62,28 @@
     height: 0;
     border: none;
     box-shadow: 0 0 10px 1px black;
+}
+
+input[type="date"] {
+    background-color: #198754;
+    padding: 10px;
+    top: 50%;
+    left: 50%;
+    font-family: "Roboto Mono", monospace;
+    color: #ffffff;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+::-webkit-calendar-picker-indicator {
+    background-color: #ffffff;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }

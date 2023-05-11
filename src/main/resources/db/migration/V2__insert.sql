@@ -7,12 +7,12 @@ values ('ROLE_USER'),
        ('ROLE_ADMIN'),
        ('ROLE_SYSADMIN');
 
-insert into users (username, password, location, email)
-values ('admin', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'admin', 'admin@local.org'),
-       ('director', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'Кинешма', 'director@local.org'),
-       ('manager1', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'Кинешма', 'manager1@local.org'),
-       ('manager2', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'Заволжск', 'manager2@local.org'),
-       ('maker', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'Производство', 'manufacture@local.org');
+insert into users (username, first_name, password, location, email)
+values ('admin', 'admin', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'admin', 'admin@local.org'),
+       ('director', 'director', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'Кинешма', 'director@local.org'),
+       ('manager1', 'manager1', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'Кинешма', 'manager1@local.org'),
+       ('manager2', 'manager2','$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'Заволжск', 'manager2@local.org'),
+       ('maker', 'maker','$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'Производство', 'manufacture@local.org');
 
 insert into users_roles (user_id, role_id)
 values (1, 1),
@@ -30,3 +30,6 @@ values (1, 1),
        (4, 4),
        (5, 1),
        (5, 5);
+
+insert into options (name, letter_name_cost, letter_epitaph_cost, digit_cost)
+values ('Price', 35, 35, 35);

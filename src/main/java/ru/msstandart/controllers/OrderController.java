@@ -11,6 +11,8 @@ import ru.msstandart.dto.OrderDtoForList;
 import ru.msstandart.dto.OrderDtoOut;
 import ru.msstandart.services.OrderService;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("/api/v1/orders")
 @RequiredArgsConstructor
@@ -30,8 +32,8 @@ public class OrderController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('ROLE_MANAGER')")
-    public void createOrder(Authentication authentication, @RequestBody OrderDtoIn orderDtoIn){
-        orderService.saveOrder(authentication.getName(), orderDtoIn);
+    public void createOrder(Principal principal, @RequestBody OrderDtoIn orderDtoIn){
+        orderService.saveOrder(principal.getName(), orderDtoIn);
     }
 
     @GetMapping("/{id}")

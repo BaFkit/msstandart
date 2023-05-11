@@ -7,6 +7,7 @@ import ru.msstandart.enumeration.OrderLocations;
 import ru.msstandart.enumeration.StatusOrder;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -29,6 +30,7 @@ public class OrderDtoOut {
     private String stoneKit;
     private BigDecimal stoneKitCost;
     private String stoneFigure;
+    private BigDecimal stoneFigureCost;
     private String nameOnMonument;
     private BigDecimal nameOnMonumentCost;
     private String dateOnMonument;
@@ -68,6 +70,7 @@ public class OrderDtoOut {
     private BigDecimal orderCost;
     private OrderLocations orderLocations;
     private String status;
+    private LocalDate orderCompletionDate;
     private LocalDateTime createdAt;
     private Long previewImageId;
 

@@ -59,6 +59,7 @@ public class OrderService {
       Order order = EntityDtoMapper.INSTANCE.toEntity(orderDtoIn);
       if (orderDtoIn.getNotStandardFigure() != null) order.setStoneFigure(orderDtoIn.getNotStandardFigure());
       if (orderDtoIn.getNotStandardSize() != null) order.setStoneSize(orderDtoIn.getNotStandardSize());
+      if (orderDtoIn.getNotStandardKit() != null) order.setStoneKit(orderDtoIn.getNotStandardKit());
       if (orderDtoIn.getDateOnMonument1() != null && orderDtoIn.getDateOnMonument2() != null) order.setDateOnMonument(orderDtoIn.getDateOnMonument1() + " - " + orderDtoIn.getDateOnMonument2());
       order.setOrderLocations(OrderLocations.valueOf(userService.findByUsername(username).getLocation()));
       order.setStatus(StatusOrder.Signing);

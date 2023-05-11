@@ -7,8 +7,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
-    private Long id;
-    private String username;
-    private String firstName;
+public class PriceDto {
+
+    private String name;
+
+    private Integer letterNameCost;
+
+    private Integer letterEpitaphCost;
+
+    private Integer digitCost;
+
 }

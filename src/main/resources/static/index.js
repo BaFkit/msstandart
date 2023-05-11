@@ -6,6 +6,10 @@
 
     function config($routeProvider) {
         $routeProvider
+            .when('/home', {
+                templateUrl: 'home/home.html',
+                controller: 'homeController'
+            })
             .when('/catalog', {
                 templateUrl: 'catalog/catalog.html',
                 controller: 'catalogController'
@@ -30,9 +34,21 @@
                 templateUrl: 'order-view/order-view-print.html',
                 controller: 'orderViewPrintController'
             })
+            .when('/order-view-images', {
+                templateUrl: 'order-view/order-view-images.html',
+                controller: 'orderViewImagesController'
+            })
             .when('/personnel', {
                 templateUrl: 'personnel/personnel.html',
                 controller: 'personnelController'
+            })
+            .when('/settings', {
+                templateUrl: 'settings/settings.html',
+                controller: 'settingsController'
+            })
+            .when('/profile', {
+                templateUrl: 'profile/profile.html',
+                controller: 'profileController'
             })
             .otherwise({
                 redirectTo: '/'
@@ -51,7 +67,7 @@
 
 angular.module('msstandart').controller('indexController', function ($scope, $rootScope, $http, $location, $localStorage) {
 
-
+    const contextPath = 'http://localhost:8080/';
 
     if ($localStorage.webUser) {
         try {
@@ -59,7 +75,6 @@ angular.module('msstandart').controller('indexController', function ($scope, $ro
             let payload = JSON.parse(atob(jwt.split('.')[1]));
             let currentTime = parseInt(new Date().getTime() / 1000);
             if (currentTime > payload.exp) {
-                // alert("Token is expired!!!");
                 delete $localStorage.webUser;
                 $http.defaults.headers.common.Authorization = '';
                 $location.path('/');
@@ -73,9 +88,8 @@ angular.module('msstandart').controller('indexController', function ($scope, $ro
     }
 
     $scope.tryToAuth = function () {
-        $http.post('http://localhost:8080/auth', $scope.user)
+        $http.post(contextPath + 'auth', $scope.user)
             .then(function successCallback(response) {
-                console.log(response);
                 if (response.data.token) {
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
                     $localStorage.webUser = {token: response.data.token};
@@ -87,8 +101,8 @@ angular.module('msstandart').controller('indexController', function ($scope, $ro
                     $scope.user.username = null;
                     $scope.user.password = null;
 
-                    $location.path('/');
-                    updateDropDown()
+                    $location.path('/home');
+                    $rootScope.loadProfile();
                 }
             }, function errorCallback(response) {
                 alert(response.data.message);
@@ -104,6 +118,7 @@ angular.module('msstandart').controller('indexController', function ($scope, $ro
         delete $localStorage.webUser;
         $localStorage.username = null;
         $localStorage.userRoles = null;
+        $localStorage.firstName = null;
         $http.defaults.headers.common.Authorization = '';
     };
 
@@ -128,11 +143,27 @@ angular.module('msstandart').controller('indexController', function ($scope, $ro
         return isRole;
     };
 
-    function updateDropDown() {
+    $scope.tryToCreatePost = function () {
+        $scope.post.author = $scope.profile.firstName;
+        $http.post(contextPath + 'api/v1/posts', $scope.post)
+            .then(function successCallback(response) {
+                $scope.post = null;
+                $rootScope.loadPosts();
+            },function errorCallback(response) {
+                alert('Ошибка в создании сообщения');
+            });
+    }
+
+
+    $rootScope.loadProfile = function () {
         if ($localStorage.webUser) {
-            $scope.username = $localStorage.username;
+            $http.get(contextPath + 'api/v1/users/profile')
+                .then(function (response) {
+                    $localStorage.profile = response.data;
+                    $scope.profile = $localStorage.profile
+                });
         }
     }
 
-    updateDropDown()
+    $rootScope.loadProfile()
 });

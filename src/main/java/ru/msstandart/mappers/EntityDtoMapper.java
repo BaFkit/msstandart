@@ -3,12 +3,8 @@ package ru.msstandart.mappers;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
-import ru.msstandart.dto.OrderDtoIn;
-import ru.msstandart.dto.OrderDtoForList;
-import ru.msstandart.dto.OrderDtoOut;
-import ru.msstandart.dto.UserDto;
-import ru.msstandart.entities.Order;
-import ru.msstandart.entities.User;
+import ru.msstandart.dto.*;
+import ru.msstandart.entities.*;
 
 @Mapper
 public interface EntityDtoMapper {
@@ -24,4 +20,16 @@ public interface EntityDtoMapper {
     OrderDtoForList toDtoForList(Order order);
 
     UserDto toDto(User user);
+
+    ProfileDto profileToDto(User user);
+
+    ImageDto toDto(Image image);
+
+    PriceDto toDto(Options options);
+
+    PostDto toDto(Post post);
+
+    Post toEntity(PostDto postDto);
+
+
 }
