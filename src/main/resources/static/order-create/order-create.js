@@ -1,8 +1,8 @@
 angular.module('msstandart').controller('orderCreateController', function ($scope, $http, $localStorage) {
-    const contextPath = 'http://localhost:8080/api/v1/orders';
+    const contextPath = 'http://localhost:8080/api/v1';
 
     $scope.tryCreateNewOrder = function () {
-        $http.post(contextPath, $scope.newOrder)
+        $http.post(contextPath + '/orders', $scope.newOrder)
             .then(function successCallback(response) {
                 alert('Заказ создан ');
                 $scope.newOrder = null;
@@ -29,24 +29,12 @@ angular.module('msstandart').controller('orderCreateController', function ($scop
         }
     }
 
-    $scope.isNotStandardFigure = function () {
-        if ($scope.newOrder.stoneFigure !== "Не стандарт") {
-            return true;
-        } else {
-            return false;
-        }
+    $scope.isNotStandard = function (notStandard) {
+        return notStandard !== "Не стандарт";
     }
-    $scope.isNotStandardSize = function () {
-        if ($scope.newOrder.stoneSize !== "Не стандарт") {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 
     $scope.calculationMonumentCost = function () {
-        return $scope.newOrder.stoneCost =  $scope.newOrder.monumentCost +  $scope.newOrder.stoneKitCost;
+        return $scope.newOrder.stoneCost =  $scope.newOrder.monumentCost +  $scope.newOrder.stoneKitCost + $scope.newOrder.stoneFigureCost;
     }
     $scope.calculationWorksOnMonumentCost = function () {
         return $scope.newOrder.workCost =
@@ -76,19 +64,58 @@ angular.module('msstandart').controller('orderCreateController', function ($scop
 
     $scope.countLettersNameOnMonument = function (letters) {
         let lettersLength;
-        if (letters !== "") {
-            lettersLength = letters.match(/[a-zA-Zа-яА-Я]/g).length;
-            $scope.newOrder.nameOnMonumentCost = lettersLength * 35;
+        if(letters == undefined) {
+            $scope.newOrder.nameOnMonumentCost = 0;
+            return;
+        }
+        letters = letters.match(/[a-zA-Zа-яА-Я]/g);
+        if(letters == null) {
+            $scope.newOrder.nameOnMonumentCost = 0;
+        } else {
+            lettersLength = letters.length;
+            $scope.newOrder.nameOnMonumentCost = lettersLength * $scope.prices.letterNameCost;
             return lettersLength;
         }
     }
     $scope.countLettersEpitaph = function (letters) {
         let lettersLength;
-        if (letters !== "") {
-            lettersLength = letters.match(/[a-zA-Zа-яА-Я]/g).length;
-            $scope.newOrder.epitaphCost = lettersLength * 35;
+        if(letters == undefined) {
+            $scope.newOrder.epitaphCost = 0;
+            return;
+        }
+        letters = letters.match(/[a-zA-Zа-яА-Я]/g);
+        if(letters == null) {
+            $scope.newOrder.epitaphCost = 0;
+        } else {
+            lettersLength = letters.length;
+            $scope.newOrder.epitaphCost = lettersLength * $scope.prices.letterEpitaphCost;
             return lettersLength;
         }
     }
+    $scope.countDigits = function (digits) {
+        let digitsLength;
+        if(digits == undefined) {
+            $scope.newOrder.dateOnMonumentCost = 0;
+            return;
+        }
+        digits = digits.match(/[0-9]/g);
+        if(digits == null) {
+            $scope.newOrder.dateOnMonumentCost = 0;
+        } else {
+            digitsLength = digits.length;
+            $scope.newOrder.dateOnMonumentCost = digitsLength * $scope.prices.digitCost;
+            return digitsLength;
+        }
+    }
 
+    $scope.loadPrices = function () {
+        $http.get(contextPath + '/options/prices')
+            .then(function (response) {
+                $scope.prices = response.data;
+            }, function errorCallback(response) {
+                alert('Ошибка в загрузке цен');
+            });
+    }
+
+    $scope.loadPrices();
 });

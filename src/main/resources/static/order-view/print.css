@@ -4,7 +4,7 @@
         height: 297mm;
         width: 210mm;
         font-size: 12px;
-
+        font-family: Avenir, Arial, sans-serif;
     }
 
     /*ul, ol, table {*/
@@ -13,6 +13,7 @@
 
     tr {
         page-break-inside: avoid;
+        line-height: 1;
     }
 
     h1 {
@@ -43,6 +44,10 @@
         display: block;
         /*position: absolute;*/
         bottom: 0;
+    }
+
+    #menuTop {
+        display: none;
     }
 
     #rectangle1 {

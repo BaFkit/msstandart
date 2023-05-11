@@ -7,8 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
+public class ImageDto {
+
     private Long id;
-    private String username;
-    private String firstName;
+
+    private String name;
+
+    private byte[] bytes;
 }

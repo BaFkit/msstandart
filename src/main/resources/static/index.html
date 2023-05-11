@@ -51,7 +51,7 @@
                 </div>
                 <ul class="nav-pills flex-column mt-4" ng-show="isUserLoggedIn()">
                     <li class="nav-item py-2 py-sm-0">
-                        <a href="#" class="nav-link text-white">
+                        <a href="#!/home" class="nav-link text-white">
                             <i class="fs-5 fa fa-house"></i><span
                                 class="fs-4 ms-3 d-none d-sm-inline">Главная</span>
                         </a>
@@ -92,31 +92,67 @@
                 </ul>
             </div>
 
-            <div class="dropdown open p-3 ng-cloak ng-cloak" ng-show="isUserLoggedIn()">
+            <div class="dropdown open p-3 ng-cloak" id="dropdownRightMenu" ng-show="isUserLoggedIn()">
                 <div id="button-order-new" class="d-grid gap-2">
                     <a class="btn btn-success" href="#!/order-create" type="button" ng-show="!isUserRoles('ROLE_MAKER')">Оформить новый заказ</a>
                 </div>
                 <button class="btn border-none dropdown-toggle text-white" type="button" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-user"></i><span class="ms-2" >{{username}}</span>
+                    <i class="fa fa-user"></i><span class="ms-2" >{{profile.firstName}}</span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="triggerId">
-                    <button class="dropdown-item" href="#">Профиль</button>
-                    <button class="dropdown-item" href="#">Настройки</button>
+                    <button ng-show="isUserRoles('ROLE_ADMIN')" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Создать сообщение</button>
+                    <a class="dropdown-item" href="#!/profile">Профиль</a>
+                    <a ng-show="isUserRoles('ROLE_ADMIN')" class="dropdown-item" href="#!/settings">Настройки</a>
                     <button class="dropdown-item" href="#" ng-click="tryToLogout()">Выйти</button>
                 </div>
             </div>
+
+<!--------------<<модальное окно для поста>>------------->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Новая сообщение</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group mb-3">
+                                <input id="themePostField" class="form-control" ng-model="post.title" type="text"
+                                       placeholder="Тема сообщение"
+                                       aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group mb-3">
+                                <textarea id="messagePostField" class="form-control" ng-model="post.message" type="text"
+                                       placeholder="Текст сообщения"
+                                       aria-describedby="inputGroup-sizing-sm" rows="6"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" ng-click="tryToCreatePost()" data-bs-dismiss="modal">
+                                Создать
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!----------------------- <<>>---------------------------->
+
+
         </div>
         <div class="content">
             <ng-view></ng-view>
-
             <script src="index.js"></script>
+            <script src="home/home.js"></script>
             <script src="orders/orders.js"></script>
             <script src="info/info.js"></script>
             <script src="order-create/order-create.js"></script>
             <script src="order-view/order-view.js"></script>
             <script src="order-view/order-view-print.js"></script>
+            <script src="order-view/order-view-images.js"></script>
             <script src="personnel/personnel.js"></script>
+            <script src="settings/settings.js"></script>
+            <script src="profile/profile.js"></script>
             <script src=""></script>
         </div>
     </div>

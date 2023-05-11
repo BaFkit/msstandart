@@ -28,13 +28,15 @@ public class OrderDtoIn {
     private String stoneSize;
     private String notStandardSize;
     private String stoneKit;
+    private String notStandardKit;
     private BigDecimal stoneKitCost;
     private String stoneFigure;
     private String notStandardFigure;
+    private BigDecimal stoneFigureCost;
     private String nameOnMonument;
     private BigDecimal nameOnMonumentCost;
-    private LocalDate dateOnMonument1;
-    private LocalDate dateOnMonument2;
+    private String dateOnMonument1;
+    private String dateOnMonument2;
     private BigDecimal dateOnMonumentCost;
     private Integer holesInStand;
     private BigDecimal holesInStandCost;
@@ -71,6 +73,7 @@ public class OrderDtoIn {
     private BigDecimal orderCost;
     private StatusOrder status;
     private Long previewImageId;
+    private LocalDate orderCompletionDate;
     private LocalDateTime createdAt;
 
 }

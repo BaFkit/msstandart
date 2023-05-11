@@ -10,6 +10,7 @@ import ru.msstandart.enumeration.StatusOrder;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -51,6 +52,8 @@ public class Order {
     private BigDecimal stoneKitCost;
 
     private String stoneFigure;
+
+    private BigDecimal stoneFigureCost;
 
     private String nameOnMonument;
 
@@ -131,6 +134,11 @@ public class Order {
 
     @Enumerated(EnumType.STRING)
     private StatusOrder status;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Comment> comments;
+
+    private LocalDate orderCompletionDate;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

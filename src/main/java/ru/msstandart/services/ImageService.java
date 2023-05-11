@@ -5,14 +5,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import ru.msstandart.dto.ImageDto;
 import ru.msstandart.entities.Image;
 import ru.msstandart.entities.Order;
 import ru.msstandart.exceptions.ResourceNotFoundException;
+import ru.msstandart.mappers.EntityDtoMapper;
 import ru.msstandart.repositories.ImageRepository;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
@@ -29,10 +32,11 @@ public class ImageService {
     public Image uploadImageToOrder(MultipartFile file, Long orderId, boolean isPreviewImage) throws IOException {
         Order order = orderService.findOrderById(orderId);
         Image image = new Image();
+        order.getImages().add(image);
         image.setOrder(order);
         image.setBytes(compressBytes(file.getBytes()));
         image.setOriginalFileName(file.getOriginalFilename());
-        image.setName(order.getVendorCode() + file.getName());
+        image.setName(order.getVendorCode() + file.getOriginalFilename());
         image.setSize(file.getSize());
         image.setContentType(file.getContentType());
         image = imageRepository.save(image);
@@ -44,20 +48,20 @@ public class ImageService {
     }
 
     @Transactional(readOnly = true)
-    public List<Image> getImagesFromOrder(Long orderId) {
+    public List<ImageDto> getImagesFromOrder(Long orderId) {
         Order order = orderService.findOrderById(orderId);
         List<Image> images = order.getImages();
         images.forEach(image -> image.setBytes(decompressBytes(image.getBytes())));
-        return images;
+        return images.stream().map(EntityDtoMapper.INSTANCE::toDto).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
-    public Image getPreviewImageFromOrder(Long orderId) {
+    public ImageDto getPreviewImageFromOrder(Long orderId) {
       Order order = orderService.findOrderById(orderId);
+      if (order.getPreviewImageId() == null) throw new ResourceNotFoundException("Preview image is missing");
       Image image = imageRepository.findById(order.getPreviewImageId()).orElseThrow(() -> new ResourceNotFoundException(String.format("Image with id:'%d' not found", order.getPreviewImageId())));
       image.setBytes(decompressBytes(image.getBytes()));
-        System.out.println("123");
-      return image;
+      return EntityDtoMapper.INSTANCE.toDto(image);
     }
 
     @Transactional(readOnly = true)

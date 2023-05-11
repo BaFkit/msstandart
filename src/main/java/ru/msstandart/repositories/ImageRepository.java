@@ -12,5 +12,7 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
 
     List<Image> findAllByOrder(Order order);
 
+    List<Image> findAllByOrderId(Long orderId);
+
 }
 

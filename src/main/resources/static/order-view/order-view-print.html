@@ -1,6 +1,9 @@
 <div ng-show="!isUserRoles('ROLE_MAKER')">
     <link media="print" rel="stylesheet" href="/order-view/print.css">
-
+    <div id="menuTop">
+        <input type="button" class="btn btn-secondary sticky-sm-top" onclick="history.back();" value="<- Назад к заказу"/>
+        <input type="button" class="btn btn-success sticky-sm-top" ng-click="printOrder()" class="btn btn-success btn-lg" value="Распечатать"/>
+    </div>
     <div class="row">
         <div class="col-9">
             <h4>Заказ №: <span ng-bind="order.id"></span></h4>
@@ -11,7 +14,9 @@
     </div>
     <div class="row">
         <div class="col">
-            <h4></h4>
+            <div>
+                <img ng-src="data:image/JPEG;base64,{{orderPreview}}" class="img-thumbnail" ng-hide="!orderPreview" alt="" width="250" height="250">
+            </div>
         </div>
         <div class="col">
             <p>Заказчик: {{order.fullName}}<br>
@@ -56,12 +61,12 @@
             <tr>
                 <th scope="row">Фигура:</th>
                 <td>{{order.stoneFigure}}</td>
-                <td></td>
+                <td>{{order.stoneFigureCost}}</td>
             </tr>
             <tr>
                 <th scope="row">Комплект памятника:</th>
                 <td>{{order.stoneKit}}</td>
-                <td></td>
+                <td>{{order.stoneKitCost}}</td>
             </tr>
             <tr>
                 <th scope="row">ФИО на памятнике:</th>
@@ -74,7 +79,7 @@
                 <td>{{order.dateOnMonumentCost}}</td>
             </tr>
             <tr>
-                <th scope="row">Колличество отверстий под штыри:</th>
+                <th scope="row">Количество отверстий под штыри:</th>
                 <td>{{order.holesInStand}}</td>
                 <td>{{order.holesInStandCost}}</td>
             </tr>

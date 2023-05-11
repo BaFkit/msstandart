@@ -1,0 +1,48 @@
+<div class="container" ng-show="isUserRoles('ROLE_ADMIN')">
+    <div class="row">
+        <div class="col-12">
+            <h4>Стоимость Буквы в ФИО: {{prices.letterNameCost}}</h4>
+            <h4>Стоимость Буквы в эпитафии: {{prices.letterEpitaphCost}}</h4>
+            <h4>Стоимость цифры в датах: {{prices.digitCost}}</h4>
+        </div>
+        <div>
+            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Сменить цены</button>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Сменить цены</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="letterNameCostHelp" class="form-text">Цена одной буквы в ФИО:</div>
+                    <div class="input-group mb-3">
+                        <input id="letterNameCostField" class="form-control" ng-model="prices.letterNameCost" type="number"
+                               placeholder="Введите новую цену"
+                               aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                    <div id="letterEpitaphCosHelp" class="form-text">Цена одной буквы в эпитафии:</div>
+                    <div class="input-group mb-3">
+                        <input id="letterEpitaphCostField" class="form-control" ng-model="prices.letterEpitaphCost" type="number"
+                               placeholder="Введите новую цену"
+                               aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                    <div id="digitCostHelp" class="form-text">Цена одной цифры в датах:</div>
+                    <div class="input-group mb-3">
+                        <input id="digitCostField" class="form-control" ng-model="prices.digitCost" type="number"
+                               placeholder="Введите новую цену"
+                               aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="changePrices()" data-bs-dismiss="modal">
+                        Сменить цены
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -20,7 +20,7 @@ angular.module('msstandart').controller('personnelController', function ($scope,
     $scope.changePassword = function () {
         $http({
             url: contextPath + "/change/pass",
-            method: 'POST',
+            method: 'PUT',
             params: {
                 id: $scope.userId,
                 password: $scope.password

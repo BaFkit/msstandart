@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.msstandart.dto.ProfileDto;
 import ru.msstandart.dto.UserDto;
 import ru.msstandart.dto.UserDtoForChangePass;
 import ru.msstandart.entities.Role;
@@ -39,12 +40,18 @@ public class UserService implements UserDetailsService {
         return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
+    public ProfileDto getProfile(String username) {
+        return EntityDtoMapper.INSTANCE.profileToDto(findByUsername(username));
+    }
+
     public User findByUsername(String username) {
         User user = userRepository.findByUsername(username);
         if (user == null) throw new UsernameNotFoundException(String.format("User '%s' not found", username));
         return user;
     }
 
+    @Transactional(readOnly = true)
     public List<UserDto> findAllUsers() {
        return userRepository.findAllExceptAdmin("admin").stream().map(EntityDtoMapper.INSTANCE::toDto).collect(Collectors.toList());
     }
@@ -53,6 +60,13 @@ public class UserService implements UserDetailsService {
     public void changePassword(Long userId, String password) {
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException(String.format("User with id: '%d' not found", userId)));
         user.setPassword(passwordEncoder.encode(password));
+        userRepository.save(user);
+    }
+
+    @Transactional
+    public void changeFirstName(String username, String firstName) {
+        User user = userRepository.findByUsername(username);
+        user.setFirstName(firstName);
         userRepository.save(user);
     }
 

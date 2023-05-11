@@ -15,6 +15,7 @@ create table orders
     stone_kit                    varchar(255),
     stone_kit_cost               numeric(8, 2),
     stone_figure                 varchar(255),
+    stone_figure_cost            numeric(8, 2),
     name_on_monument             varchar(255),
     name_on_monument_cost        numeric(8, 2),
     date_on_monument             varchar(255),
@@ -54,7 +55,9 @@ create table orders
     order_cost                   numeric(8, 2),
     order_locations              varchar(80),
     status                       varchar(50),
+
     preview_image_id             bigint,
+    order_completion_date        date,
     created_at                   timestamp default current_timestamp,
     updated_at                   timestamp default current_timestamp
 );
@@ -63,6 +66,7 @@ create table users
 (
     id         bigserial primary key,
     username   varchar(36) not null,
+    first_name varchar(80),
     password   varchar(80) not null,
     location   varchar(80) not null,
     email      varchar(50) unique,
@@ -90,6 +94,34 @@ create table images
     order_id           bigserial references orders (id),
     created_at         timestamp default current_timestamp,
     updated_at         timestamp default current_timestamp
+);
+
+create table options
+(
+    name                    varchar(50) primary key,
+    letter_name_cost        int,
+    letter_epitaph_cost     int,
+    digit_cost              int
+);
+
+create table posts
+(
+    id          bigserial primary key,
+    title       varchar(255),
+    message     text,
+    author      varchar(255),
+    created_at  timestamp default current_timestamp,
+    updated_at  timestamp default current_timestamp
+);
+
+create table comments
+(
+    id          bigserial primary key,
+    message     text,
+    author      varchar(255),
+    order_id    bigserial references orders (id),
+    created_at  timestamp default current_timestamp,
+    updated_at  timestamp default current_timestamp
 );
 
 create table users_roles
