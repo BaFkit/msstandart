@@ -45,14 +45,18 @@
     width: 75%;
 }
 
+#requisites {
+    display: none;
+}
+
 #signing {
     display: none;
 }
 
-#dropdownRightMenu {
-    position: fixed;
-    bottom: 0;
-}
+/*#dropdownRightMenu {*/
+/*    position: fixed;*/
+/*    bottom: 0;*/
+/*}*/
 
 /*<<<<<<Order page:>>>>>>*/
 

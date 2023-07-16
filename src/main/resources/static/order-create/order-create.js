@@ -39,7 +39,11 @@ angular.module('msstandart').controller('orderCreateController', function ($scop
     $scope.calculationWorksOnMonumentCost = function () {
         return $scope.newOrder.workCost =
             $scope.newOrder.nameOnMonumentCost +
+            $scope.newOrder.nameOnMonumentCostSecond +
+            $scope.newOrder.nameOnMonumentCostThird +
             $scope.newOrder.dateOnMonumentCost +
+            $scope.newOrder.dateOnMonumentCostSecond +
+            $scope.newOrder.dateOnMonumentCostThird +
             $scope.newOrder.holesInStandCost +
             $scope.newOrder.portraitCost +
             $scope.newOrder.portraitFasteningCost +
@@ -77,6 +81,36 @@ angular.module('msstandart').controller('orderCreateController', function ($scop
             return lettersLength;
         }
     }
+    $scope.countLettersNameOnMonumentSecond = function (letters) {
+        let lettersLength;
+        if(letters == undefined) {
+            $scope.newOrder.nameOnMonumentCostSecond = 0;
+            return;
+        }
+        letters = letters.match(/[a-zA-Zа-яА-Я]/g);
+        if(letters == null) {
+            $scope.newOrder.nameOnMonumentCostSecond = 0;
+        } else {
+            lettersLength = letters.length;
+            $scope.newOrder.nameOnMonumentCostSecond = lettersLength * $scope.prices.letterNameCost;
+            return lettersLength;
+        }
+    }
+    $scope.countLettersNameOnMonumentThird = function (letters) {
+        let lettersLength;
+        if(letters == undefined) {
+            $scope.newOrder.nameOnMonumentCostThird = 0;
+            return;
+        }
+        letters = letters.match(/[a-zA-Zа-яА-Я]/g);
+        if(letters == null) {
+            $scope.newOrder.nameOnMonumentCostThird = 0;
+        } else {
+            lettersLength = letters.length;
+            $scope.newOrder.nameOnMonumentCostThird = lettersLength * $scope.prices.letterNameCost;
+            return lettersLength;
+        }
+    }
     $scope.countLettersEpitaph = function (letters) {
         let lettersLength;
         if(letters == undefined) {
@@ -104,6 +138,36 @@ angular.module('msstandart').controller('orderCreateController', function ($scop
         } else {
             digitsLength = digits.length;
             $scope.newOrder.dateOnMonumentCost = digitsLength * $scope.prices.digitCost;
+            return digitsLength;
+        }
+    }
+    $scope.countDigitsSecond = function (digits) {
+        let digitsLength;
+        if(digits == undefined) {
+            $scope.newOrder.dateOnMonumentCostSecond = 0;
+            return;
+        }
+        digits = digits.match(/[0-9]/g);
+        if(digits == null) {
+            $scope.newOrder.dateOnMonumentCostSecond = 0;
+        } else {
+            digitsLength = digits.length;
+            $scope.newOrder.dateOnMonumentCostSecond = digitsLength * $scope.prices.digitCost;
+            return digitsLength;
+        }
+    }
+    $scope.countDigitsThird = function (digits) {
+        let digitsLength;
+        if(digits == undefined) {
+            $scope.newOrder.dateOnMonumentCostThird = 0;
+            return;
+        }
+        digits = digits.match(/[0-9]/g);
+        if(digits == null) {
+            $scope.newOrder.dateOnMonumentCostThird = 0;
+        } else {
+            digitsLength = digits.length;
+            $scope.newOrder.dateOnMonumentCostThird = digitsLength * $scope.prices.digitCost;
             return digitsLength;
         }
     }

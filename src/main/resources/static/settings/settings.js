@@ -7,7 +7,7 @@ angular.module('msstandart').controller('settingsController', function ($scope, 
             .then(function (response) {
                 $scope.prices = response.data;
             }, function errorCallback(response) {
-                alert('Ошибка в загрузке цен');
+                alert('Ошибка в загрузке цены');
             });
     }
 
@@ -16,7 +16,7 @@ angular.module('msstandart').controller('settingsController', function ($scope, 
             .then(function(response) {
                 $scope.loadPrices();
             }, function errorCallback(response) {
-                alert('Ошибка в смене цен');
+                alert('Ошибка в смене цены');
             });
     }
 
