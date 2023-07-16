@@ -9,7 +9,12 @@
             <h4>Заказ №: <span ng-bind="order.id"></span></h4>
         </div>
         <div class="col-3">
-            <p>Место заказа: <span ng-bind="order.orderLocations"></span></p>
+            <div id="requisites">
+                <p>ИП Усова Галина Павловна<br>
+                    ИНН 370306150670<br>
+                    ОГРН 304370304900090<br>
+                    Адрес: г.Кинешма, ул.Островского, д.5<br></p>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -19,7 +24,8 @@
             </div>
         </div>
         <div class="col">
-            <p>Заказчик: {{order.fullName}}<br>
+            <p>Место заказа: <span ng-bind="order.orderLocations"></span><br>
+                Заказчик: {{order.fullName}}<br>
                 Телефон: {{order.phone}}<br>
                 E-mail: {{order.email}}<br>
                 Адрес: {{order.address}}<br>
@@ -78,6 +84,30 @@
                 <td>{{order.dateOnMonument}}</td>
                 <td>{{order.dateOnMonumentCost}}</td>
             </tr>
+
+<!-----------------------------<Для общего памятника>----------------------------->
+            <tr ng-hide="!order.nameOnMonumentSecond">
+                <th scope="row">Второе ФИО на памятнике:</th>
+                <td>{{order.nameOnMonumentSecond}}</td>
+                <td>{{order.nameOnMonumentCostSecond}}</td>
+            </tr>
+            <tr ng-hide="!order.dateOnMonumentSecond">
+                <th scope="row">Вторые даты на памятнике:</th>
+                <td>{{order.dateOnMonumentSecond}}</td>
+                <td>{{order.dateOnMonumentCostSecond}}</td>
+            </tr>
+            <tr ng-hide="!order.nameOnMonumentThird">
+                <th scope="row">Третье ФИО на памятнике:</th>
+                <td>{{order.nameOnMonumentThird}}</td>
+                <td>{{order.nameOnMonumentCostThird}}</td>
+            </tr>
+            <tr ng-hide="!order.dateOnMonumentThird">
+                <th scope="row">Третьи даты на памятнике:</th>
+                <td>{{order.dateOnMonumentThird}}</td>
+                <td>{{order.dateOnMonumentCostThird}}</td>
+            </tr>
+<!----------------------------------------------------------------------------------->
+
             <tr>
                 <th scope="row">Количество отверстий под штыри:</th>
                 <td>{{order.holesInStand}}</td>

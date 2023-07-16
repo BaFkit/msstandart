@@ -101,7 +101,7 @@
                     <i class="fa fa-user"></i><span class="ms-2" >{{profile.firstName}}</span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="triggerId">
-                    <button ng-show="isUserRoles('ROLE_ADMIN')" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Создать сообщение</button>
+                    <button ng-show="isUserRoles('ROLE_ADMIN')" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#postModal">Создать сообщение</button>
                     <a class="dropdown-item" href="#!/profile">Профиль</a>
                     <a ng-show="isUserRoles('ROLE_ADMIN')" class="dropdown-item" href="#!/settings">Настройки</a>
                     <button class="dropdown-item" href="#" ng-click="tryToLogout()">Выйти</button>
@@ -109,7 +109,7 @@
             </div>
 
 <!--------------<<модальное окно для поста>>------------->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">

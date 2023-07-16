@@ -143,6 +143,24 @@
             <dd class="col-sm-7 text-end">{{order.dateOnMonument}}</dd>
             <dd class="col-sm-1 text-end">{{order.dateOnMonumentCost}}</dd>
 
+<!-----------------------------<Для общего памятника>----------------------------->
+            <dt class="col-sm-4" ng-hide="!order.nameOnMonumentSecond" >Второе ФИО на памятнике:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.nameOnMonumentSecond">{{order.nameOnMonumentSecond}}</dd>
+            <dd class="col-sm-1 text-end" ng-hide="!order.nameOnMonumentSecond"></dd>
+
+            <dt class="col-sm-4" ng-hide="!order.dateOnMonumentSecond">Вторые даты на памятнике:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.dateOnMonumentSecond">{{order.dateOnMonumentSecond}}</dd>
+            <dd class="col-sm-1 text-end" ng-hide="!order.dateOnMonumentSecond">{{order.dateOnMonumentCostSecond}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.nameOnMonumentThird">Третье ФИО на памятнике:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.nameOnMonumentThird">{{order.nameOnMonumentThird}}</dd>
+            <dd class="col-sm-1 text-end" ng-hide="!order.nameOnMonumentThird"></dd>
+
+            <dt class="col-sm-4" ng-hide="!order.dateOnMonumentThird">Третьи даты на памятнике:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.dateOnMonumentThird">{{order.dateOnMonumentThird}}</dd>
+            <dd class="col-sm-1 text-end" ng-hide="!order.dateOnMonumentThird">{{order.dateOnMonumentCostThird}}</dd>
+<!------------------------------------------------------------------------------>
+
             <dt class="col-sm-4">Колличество отверстий под штыри:</dt>
             <dd class="col-sm-7 text-end">{{order.holesInStand}}</dd>
             <dd class="col-sm-1 text-end">{{order.holesInStandCost}}</dd>
@@ -267,6 +285,22 @@
 
             <dt class="col-sm-4">Даты на памятнике:</dt>
             <dd class="col-sm-7 text-end">{{order.dateOnMonument}}</dd>
+
+<!-----------------------------<Для общего памятника>----------------------------->
+            <dt class="col-sm-4" ng-hide="!order.nameOnMonumentSecond">Второе ФИО на памятнике:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.nameOnMonumentSecond">{{order.nameOnMonumentSecond}}</dd>
+            <dd class="col-sm-1 text-end" ng-hide="!order.nameOnMonumentSecond"></dd>
+
+            <dt class="col-sm-4" ng-hide="!order.dateOnMonumentSecond">Вторые даты на памятнике:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.dateOnMonumentSecond">{{order.dateOnMonumentSecond}}</dd>
+
+            <dt class="col-sm-4" ng-hide="!order.nameOnMonumentThird">Третье ФИО на памятнике:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.nameOnMonumentThird">{{order.nameOnMonumentThird}}</dd>
+            <dd class="col-sm-1 text-end" ng-hide="!order.nameOnMonumentThird"></dd>
+
+            <dt class="col-sm-4" ng-hide="!order.dateOnMonumentThird">Третьи даты на памятнике:</dt>
+            <dd class="col-sm-7 text-end" ng-hide="!order.dateOnMonumentThird">{{order.dateOnMonumentThird}}</dd>
+<!----------------------------------------------------------------------------------->
 
             <dt class="col-sm-4">Колличество отверстий под штыри:</dt>
             <dd class="col-sm-7 text-end">{{order.holesInStand}}</dd>

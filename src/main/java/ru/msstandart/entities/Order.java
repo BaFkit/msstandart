@@ -63,6 +63,23 @@ public class Order {
 
     private BigDecimal dateOnMonumentCost;
 
+    private String nameOnMonumentSecond;
+
+    private BigDecimal nameOnMonumentCostSecond;
+
+    private String dateOnMonumentSecond;
+
+    private BigDecimal dateOnMonumentCostSecond;
+
+    private String nameOnMonumentThird;
+
+    private BigDecimal nameOnMonumentCostThird;
+
+    private String dateOnMonumentThird;
+
+    private BigDecimal dateOnMonumentCostThird;
+
+
     private Integer holesInStand;
 
     private BigDecimal holesInStandCost;

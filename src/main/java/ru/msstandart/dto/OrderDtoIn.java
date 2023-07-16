@@ -38,6 +38,16 @@ public class OrderDtoIn {
     private String dateOnMonument1;
     private String dateOnMonument2;
     private BigDecimal dateOnMonumentCost;
+    private String nameOnMonumentSecond;
+    private BigDecimal nameOnMonumentCostSecond;
+    private String dateOnMonument1Second;
+    private String dateOnMonument2Second;
+    private BigDecimal dateOnMonumentCostSecond;
+    private String nameOnMonumentThird;
+    private BigDecimal nameOnMonumentCostThird;
+    private String dateOnMonument1Third;
+    private String dateOnMonument2Third;
+    private BigDecimal dateOnMonumentCostThird;
     private Integer holesInStand;
     private BigDecimal holesInStandCost;
     private String portrait;

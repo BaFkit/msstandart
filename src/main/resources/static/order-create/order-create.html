@@ -158,56 +158,57 @@
 
     <h4 class="form-label">Работа на памятнике:</h4>
 
-    <div class="mb-3">
-        <label class="form-label">ФИО на памятнике:</label>
-        <input type="text" class="form-control" placeholder="ФИО"
-               ng-model="newOrder.nameOnMonument" ng-model-options="{ getterSetter: true }" required>
-        <div id="textHelpNameOnMonument" class="form-text">Нужно указать ФИО для гравировки на памятник</div>
+    <div>
+        <div class="mb-3">
+            <label class="form-label">ФИО на памятнике:</label>
+            <input type="text" class="form-control" placeholder="ФИО"
+                   ng-model="newOrder.nameOnMonument" ng-model-options="{ getterSetter: true }" required>
+            <div id="textHelpNameOnMonument" class="form-text">Нужно указать ФИО для гравировки на памятник</div>
 
-        <div class="row row-cols-auto">
-            <div class="col-sm-2">
-                <input type="number" class="form-control" ng-model="prices.letterNameCost">
+            <div class="row row-cols-auto">
+                <div class="col-sm-2">
+                    <input type="number" class="form-control" ng-model="prices.letterNameCost">
+                </div>
+                <div class="col">
+                    <span class="form-label">- стоимость одной буквы</span>
+                </div>
             </div>
-            <div class="col">
-                <span class="form-label">- стоимость одной буквы</span>
+            <div id="textHelpLetterNameCost" class="form-text"></div>
+
+            <div class="row row-cols-auto">
+                <div class="col-sm-2">
+                    <input type="number" class="form-control" readonly
+                           ng-model="countLettersNameOnMonument(newOrder.nameOnMonument)"
+                           ng-model-options="{ getterSetter: true }">
+                </div>
+                <div>
+                    <span class="form-label"> - кол-во букв; стоимостью:</span>
+                </div>
+                <div class="col">
+                    <input type="number" class="form-control" ng-init="newOrder.nameOnMonumentCost = 0"
+                           ng-model="newOrder.nameOnMonumentCost" readonly>
+                </div>
+                <div>
+                    <span class="form-label"> руб.</span>
+                </div>
             </div>
         </div>
-        <div id="textHelpLetterNameCost" class="form-text"></div>
 
-        <div class="row row-cols-auto">
-            <div class="col-sm-2">
-                <input type="number" class="form-control" readonly
-                       ng-model="countLettersNameOnMonument(newOrder.nameOnMonument)"
-                       ng-model-options="{ getterSetter: true }">
-            </div>
-            <div>
-                <span class="form-label"> - кол-во букв; стоимостью:</span>
-            </div>
-            <div class="col">
-                <input type="number" class="form-control" ng-init="newOrder.nameOnMonumentCost = 0"
-                       ng-model="newOrder.nameOnMonumentCost" readonly>
-            </div>
-            <div>
-                <span class="form-label"> руб.</span>
-            </div>
-        </div>
-    </div>
+        <div class="mb-3">
+            <label class="form-label">Даты на памятник:</label>
+            <div class="row row-cols-auto">
+                <div class="col">
+                    <input type="text" class="form-control" ng-model="newOrder.dateOnMonument1" placeholder="01.01.1950"
+                           maxlength="10" required>
+                    <div id="textHelpDateOnMonument1" class="form-text">Нужно указать дату</div>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" ng-model="newOrder.dateOnMonument2" placeholder="01.01.2022"
+                           maxlength="10" required>
+                    <div id="textHelpDateOnMonument2" class="form-text">Нужно указать дату</div>
+                </div>
 
-    <div class="mb-3">
-        <label class="form-label">Даты на памятник:</label>
-        <div class="row row-cols-auto">
-            <div class="col">
-                <input type="text" class="form-control" ng-model="newOrder.dateOnMonument1" placeholder="01.01.1950"
-                       maxlength="10" required>
-                <div id="textHelpDateOnMonument1" class="form-text">Нужно указать дату</div>
             </div>
-            <div class="col">
-                <input type="text" class="form-control" ng-model="newOrder.dateOnMonument2" placeholder="01.01.2022"
-                       maxlength="10" required>
-                <div id="textHelpDateOnMonument2" class="form-text">Нужно указать дату</div>
-            </div>
-
-        </div>
 
             <div class="row row-cols-auto">
                 <div class="col-sm-2">
@@ -236,7 +237,184 @@
                     <span class="form-label"> руб.</span>
                 </div>
             </div>
+        </div>
     </div>
+
+<!-----------------------------<Для общего памятника>----------------------------->
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefaultNameOnMonumentSecond"
+               ng-model="checkedNameOnMonumentSecond">
+        <label class="form-check-label" for="flexSwitchCheckDefaultNameOnMonumentSecond">Второе ФИО на памятник</label>
+        <div class="check-element animate-show-hide" ng-hide="!checkedNameOnMonumentSecond">
+            <div class="mb-3">
+                <label class="form-label">Второе ФИО на памятнике:</label>
+                <input type="text" class="form-control" placeholder="Второе ФИО"
+                       ng-model="newOrder.nameOnMonumentSecond" ng-model-options="{ getterSetter: true }">
+                <div id="textHelpNameOnMonumentSecond" class="form-text">Нужно указать ФИО для гравировки на памятник</div>
+
+<!--                <div class="row row-cols-auto">-->
+<!--                    <div class="col-sm-2">-->
+<!--                        <input type="number" class="form-control" ng-model="prices.letterNameCost">-->
+<!--                    </div>-->
+<!--                    <div class="col">-->
+<!--                        <span class="form-label">- стоимость одной буквы</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div id="textHelpLetterNameCostSecond" class="form-text"></div>-->
+
+                <div class="row row-cols-auto">
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" readonly
+                               ng-model="countLettersNameOnMonumentSecond(newOrder.nameOnMonumentSecond)"
+                               ng-model-options="{ getterSetter: true }">
+                    </div>
+                    <div>
+                        <span class="form-label"> - кол-во букв; стоимостью:</span>
+                    </div>
+                    <div class="col">
+                        <input type="number" class="form-control" ng-init="newOrder.nameOnMonumentCostSecond = 0"
+                               ng-model="newOrder.nameOnMonumentCostSecond" readonly>
+                    </div>
+                    <div>
+                        <span class="form-label"> руб.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Даты на памятник:</label>
+                <div class="row row-cols-auto">
+                    <div class="col">
+                        <input type="text" class="form-control" ng-model="newOrder.dateOnMonument1Second" placeholder="01.01.1950"
+                               maxlength="10">
+                        <div id="textHelpDateOnMonument1Second" class="form-text">Нужно указать дату</div>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" ng-model="newOrder.dateOnMonument2Second" placeholder="01.01.2022"
+                               maxlength="10">
+                        <div id="textHelpDateOnMonument2Second" class="form-text">Нужно указать дату</div>
+                    </div>
+
+                </div>
+
+<!--                <div class="row row-cols-auto">-->
+<!--                    <div class="col-sm-2">-->
+<!--                        <input type="number" class="form-control" ng-model="prices.digitCost">-->
+<!--                    </div>-->
+<!--                    <div class="col">-->
+<!--                        <span class="form-label">- стоимость одной цифры</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div id="textHelpDigitCostSecond" class="form-text"></div>-->
+
+                <div class="row row-cols-auto">
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control"
+                               ng-model="countDigitsSecond(newOrder.dateOnMonument1Second + newOrder.dateOnMonument2Second)"
+                               ng-model-options="{ getterSetter: true }" readonly>
+                    </div>
+                    <div>
+                        <span class="form-label"> - кол-во цифр; стоимостью:</span>
+                    </div>
+                    <div class="col">
+                        <input type="number" class="form-control" ng-init="newOrder.dateOnMonumentCostSecond = 0"
+                               ng-model="newOrder.dateOnMonumentCostSecond" readonly>
+                    </div>
+                    <div>
+                        <span class="form-label"> руб.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefaultNameOnMonumentThird"
+               ng-model="checkedNameOnMonumentThird">
+        <label class="form-check-label" for="flexSwitchCheckDefaultNameOnMonumentThird">Третье ФИО на памятник</label>
+        <div class="check-element animate-show-hide" ng-hide="!checkedNameOnMonumentThird">
+            <div class="mb-3">
+                <label class="form-label">Третье ФИО на памятнике:</label>
+                <input type="text" class="form-control" placeholder="Третье ФИО"
+                       ng-model="newOrder.nameOnMonumentThird" ng-model-options="{ getterSetter: true }">
+                <div id="textHelpNameOnMonumentThird" class="form-text">Нужно указать ФИО для гравировки на памятник</div>
+
+<!--                <div class="row row-cols-auto">-->
+<!--                    <div class="col-sm-2">-->
+<!--                        <input type="number" class="form-control" ng-model="prices.letterNameCost">-->
+<!--                    </div>-->
+<!--                    <div class="col">-->
+<!--                        <span class="form-label">- стоимость одной буквы</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div id="textHelpLetterNameCostThird" class="form-text"></div>-->
+
+                <div class="row row-cols-auto">
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" readonly
+                               ng-model="countLettersNameOnMonumentThird(newOrder.nameOnMonumentThird)"
+                               ng-model-options="{ getterSetter: true }">
+                    </div>
+                    <div>
+                        <span class="form-label"> - кол-во букв; стоимостью:</span>
+                    </div>
+                    <div class="col">
+                        <input type="number" class="form-control" ng-init="newOrder.nameOnMonumentCostThird = 0"
+                               ng-model="newOrder.nameOnMonumentCostThird" readonly>
+                    </div>
+                    <div>
+                        <span class="form-label"> руб.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Даты на памятник:</label>
+                <div class="row row-cols-auto">
+                    <div class="col">
+                        <input type="text" class="form-control" ng-model="newOrder.dateOnMonument1Third" placeholder="01.01.1950"
+                               maxlength="10">
+                        <div id="textHelpDateOnMonument1Third" class="form-text">Нужно указать дату</div>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" ng-model="newOrder.dateOnMonument2Third" placeholder="01.01.2022"
+                               maxlength="10">
+                        <div id="textHelpDateOnMonument2Third" class="form-text">Нужно указать дату</div>
+                    </div>
+
+                </div>
+
+<!--                <div class="row row-cols-auto">-->
+<!--                    <div class="col-sm-2">-->
+<!--                        <input type="number" class="form-control" ng-model="prices.digitCost">-->
+<!--                    </div>-->
+<!--                    <div class="col">-->
+<!--                        <span class="form-label">- стоимость одной цифры</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div id="textHelpDigitCostThird" class="form-text"></div>-->
+
+                <div class="row row-cols-auto">
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control"
+                               ng-model="countDigitsThird(newOrder.dateOnMonument1Third + newOrder.dateOnMonument2Third)"
+                               ng-model-options="{ getterSetter: true }" readonly>
+                    </div>
+                    <div>
+                        <span class="form-label"> - кол-во цифр; стоимостью:</span>
+                    </div>
+                    <div class="col">
+                        <input type="number" class="form-control" ng-init="newOrder.dateOnMonumentCostThird = 0"
+                               ng-model="newOrder.dateOnMonumentCostThird" readonly>
+                    </div>
+                    <div>
+                        <span class="form-label"> руб.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!----------------------------------------------------------------------------------->
 
     <hr class="order-create-hr">
 
@@ -632,8 +810,8 @@
     </div>
 
     <div ng-show="isPressedButton()">
-        <h5 class="text-center">Дата выполнения заказа: </h5>
-        <input class="d-grid gap-2 col-2.5 mx-auto" type="date" id="orderCompletionDateInput" placeholder="dd-MM-yyyy" ng-model="newOrder.orderCompletionDate" required/>
+        <h5>Дата выполнения заказа: </h5>
+        <input class="gap-2 col-2 mx-auto" type="date" id="orderCompletionDateInput" ng-model="newOrder.orderCompletionDate" required/>
     </div>
 
     <div id="button-order-create" class="d-grid gap-2 col-6 mx-auto" ng-show="isPressedButton()">

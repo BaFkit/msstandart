@@ -61,6 +61,8 @@ public class OrderService {
       if (orderDtoIn.getNotStandardSize() != null) order.setStoneSize(orderDtoIn.getNotStandardSize());
       if (orderDtoIn.getNotStandardKit() != null) order.setStoneKit(orderDtoIn.getNotStandardKit());
       if (orderDtoIn.getDateOnMonument1() != null && orderDtoIn.getDateOnMonument2() != null) order.setDateOnMonument(orderDtoIn.getDateOnMonument1() + " - " + orderDtoIn.getDateOnMonument2());
+      if (orderDtoIn.getDateOnMonument1Second() != null && orderDtoIn.getDateOnMonument2Second() != null) order.setDateOnMonumentSecond(orderDtoIn.getDateOnMonument1Second() + " - " + orderDtoIn.getDateOnMonument2Second());
+      if (orderDtoIn.getDateOnMonument1Third() != null && orderDtoIn.getDateOnMonument2Third() != null) order.setDateOnMonumentThird(orderDtoIn.getDateOnMonument1Third() + " - " + orderDtoIn.getDateOnMonument2Third());
       order.setOrderLocations(OrderLocations.valueOf(userService.findByUsername(username).getLocation()));
       order.setStatus(StatusOrder.Signing);
       orderRepository.save(order);
